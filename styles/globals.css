@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .stats {
+    @apply bg-[#091f1c] text-white p-4 flex-1 rounded-md border-[#004337] border-2;
+  }
+
+  .stats-container {
+    @apply bg-[#091f1c] p-5 rounded-lg border-[#004337] border;
+  }
+
+  .countdown {
+    @apply p-8 text-5xl text-center text-white rounded-lg bg-[#013F34] lg:min-w-[150px];
+  }
+
+  .countdown-label {
+    @apply text-center text-white uppercase text-sm pt-4;
+  }
+
+  .admin-button {
+    @apply bg-[#091f1c] p-2 flex-1 rounded-md border-[#004337]
+    border-2 hover:bg-emerald-500/50;
+  }
+}
+
+.connect {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+
+  --tw-text-opacity: 1 !important;
+  color: rgb(10 31 28 / var(--tw-text-opacity)) !important;
+
+  padding-left: 2rem !important
+    /* 32px */
+  ;
+  padding-right: 2rem !important
+    /* 32px */
+  ;
+
+  padding-top: 1.25rem !important
+    /* 20px */
+  ;
+  padding-bottom: 1.25rem !important
+    /* 20px */
+  ;
+
+  margin-top: 2.5rem !important
+    /* 40px */
+  ;
+
+  border-radius: 0.5rem !important
+    /* 8px */
+  ;
+
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+    0 4px 6px -4px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  font-weight: 700 !important;
+}
