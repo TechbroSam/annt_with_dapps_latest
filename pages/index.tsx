@@ -122,6 +122,7 @@ const Home: NextPage = () => {
       toast.success("Winnings withdrawn successfully!", {
         id: notification,
       });
+      console.log("contract call success", data);
     } catch (err) {
       toast.error("whoops something went wrong!", {
         id: notification,
@@ -284,11 +285,10 @@ const Home: NextPage = () => {
               disaabled:text-gray-100 disabled:to-gray-600
               disabled:cursor-not-allowed"
               >
-                Buy {quantity} tickets for {""}
+                Buy {quantity} tickets for{" "}
                 {ticketPrice &&
                   Number(ethers.utils.formatEther(ticketPrice.toString())) *
-                    quantity}
-                {""}
+                    quantity}{" "}
                 {currency}
               </button>
             </div>
