@@ -318,8 +318,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <Head>
-        <title>ANNT Draw</title>
-        <link rel="icon" href="favicon.png" />
+        <title>ANNT Draw | Stop, when the fun stops</title>
       </Head>
       <div
         className="border-t border-emerald-500/20
