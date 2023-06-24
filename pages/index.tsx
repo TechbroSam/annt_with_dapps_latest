@@ -280,7 +280,7 @@ const Home: NextPage = () => {
                 }
                 onClick={handleClick}
                 className="mt-5 w-full bg-gradient-to-br
-              from-orange-500 to-emerald-600 px-10 py-5 rounded-md
+              from-emerald-600 to-orange-400 px-10 py-5 rounded-md
               font-semibold text-white shadow-xl disabled:from-gray-600
               disaabled:text-gray-100 disabled:to-gray-600
               disabled:cursor-not-allowed"
@@ -319,8 +319,20 @@ const Home: NextPage = () => {
       </div>
       <Head>
         <title>ANNT Draw</title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="favicon.png" />
       </Head>
+      <div
+        className="border-t border-emerald-500/20
+      flex items-center text-white justify-center p-3"
+      >
+        <p className="text-xs text-emerald-700 pl-5">
+          <strong>HOW TO PLAY: </strong>Buy a max of 5 tickets per address. A
+          winner is randomly selected from the pool of addresses that buys
+          ticket, after the draw ends. At the end of each draw, login with you
+          addrress to see if you're the winner and claim winning.
+        </p>
+      </div>
+
       <footer
         className="border-t border-emerald-500/20
       flex items-center text-white justify-between p-5"
@@ -332,15 +344,15 @@ const Home: NextPage = () => {
           alt="freepik.com"
         />
         <p className="text-xs text-emerald-900 pl-5">
-          DISCLAIMER: You are responsible for any decision made by you based on
-          information on this site. Camelot and its directors, employees or
-          agents accept no liability for loss or damage (including, without
-          limitation, any special, direct, indirect or consequential loss or
-          damage or other losses or damage of whatever kind) that arise out of
-          or relate to the use of this site or its contents. If there is any
-          conflict between the information on this site and the Rules and
-          Procedures for National Lottery games (as amended from time to time),
-          the Rules and Procedures will take priority.
+          <strong>DISCLAIMER: </strong>You are responsible for any decision made
+          by you based on information on this site. ANNT DRAW and its developers
+          accept no liability for loss or damage (including, without limitation,
+          any special, direct, indirect or consequential loss or damage or other
+          losses or damage of whatever kind) that arise out of or relate to the
+          use of this site or its contents. If there is any conflict between the
+          information on this site and the Rules and Procedures for ANNT DRAW
+          (as amended from time to time), the Rules and Procedures will take
+          priority.
         </p>
       </footer>
     </div>
