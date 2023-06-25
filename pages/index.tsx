@@ -1,359 +1,674 @@
-import React, { useEffect } from "react";
+import React from "react";
+import Typed from "react-typed";
 import Head from "next/head";
-import Header from "@/components/Header";
-import { NextPage } from "next";
-import {
-  useContract,
-  useDisconnect,
-  useContractRead,
-  useContractWrite,
-  useAddress,
-} from "@thirdweb-dev/react";
-import Login from "../components/Login";
-import Loading from "../components/Loading";
-import { useState } from "react";
-import { ethers } from "ethers";
-import { currency } from "../constants";
-import CountdownTimer from "@/components/CountdownTimer";
-import toast from "react-hot-toast";
-import Marquee from "react-fast-marquee";
-import AdminControls from "@/components/AdminControls";
+import Navbar from "@/components/Navbar";
+import "../styles/main.css";
+import "../styles/main.css";
 
-const Home: NextPage = () => {
-  const address = useAddress();
-  const [userTickets, setUserTickets] = useState(0);
+import { ArrowUturnDownIcon } from "@heroicons/react/24/solid";
 
-  const [quantity, setQuantity] = useState<number>(1);
-
-  const { contract, isLoading } = useContract(
-    process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
-  );
-
-  const { data: remainingTickets } = useContractRead(
-    contract,
-    "RemainingTickets"
-  );
-
-  const { data: currentWinningReward } = useContractRead(
-    contract,
-    "CurrentWinningReward"
-  );
-
-  const { data: ticketPrice } = useContractRead(contract, "ticketPrice");
-
-  const { data: ticketCommission } = useContractRead(
-    contract,
-    "ticketCommission"
-  );
-
-  const { data: expiration } = useContractRead(contract, "expiration");
-
-  const { data: tickets } = useContractRead(contract, "getTickets");
-
-  const { mutateAsync: BuyTickets } = useContractWrite(contract, "BuyTickets");
-
-  const { mutateAsync: WithdrawWinnings } = useContractWrite(
-    contract,
-    "WithdrawWinnings"
-  );
-
-  const { data: winnings } = useContractRead(
-    contract,
-    "getWinningsForAddress",
-    [address]
-  );
-
-  const { data: lastWinner } = useContractRead(contract, "lastWinner");
-
-  const { data: lastWinnerAmount } = useContractRead(
-    contract,
-    "lastWinnerAmount"
-  );
-
-  const { data: isLotteryOperator } = useContractRead(
-    contract,
-    "lotteryOperator"
-  );
-
-  useEffect(() => {
-    if (!tickets) return;
-    const totalTickets: string[] = tickets;
-    const noOfUserTickets = totalTickets.reduce(
-      (total, ticketAddress) => (ticketAddress === address ? total + 1 : total),
-      0
-    );
-    setUserTickets(noOfUserTickets);
-  }, [tickets, address]);
-
-  const handleClick = async () => {
-    if (!ticketPrice) return;
-
-    const notification = toast.loading("Buying your tickets...");
-
-    try {
-      const data = await BuyTickets({
-        overrides: {
-          value: ethers.utils.parseEther(
-            (
-              Number(ethers.utils.formatEther(ticketPrice)) * quantity
-            ).toString()
-          ),
-        },
-      });
-
-      toast.success("Tickets purchased successfully!", {
-        id: notification,
-      });
-
-      console.info("contract call success", data);
-    } catch (err) {
-      toast.error("Whoops something went wrong", { id: notification });
-
-      console.error("contract call failure", err);
-    }
-  };
-
-  const onWithdrawWinnings = async () => {
-    const notification = toast.loading("Withdrawing winnings...");
-
-    try {
-      const data = await WithdrawWinnings({});
-
-      toast.success("Winnings withdrawn successfully!", {
-        id: notification,
-      });
-      console.log("contract call success", data);
-    } catch (err) {
-      toast.error("whoops something went wrong!", {
-        id: notification,
-      });
-
-      console.error("contract call failure", err);
-    }
-  };
-
-  if (isLoading) return <Loading />;
-  if (!address) return <Login />;
-
+const Home = () => {
   return (
-    <div className="bg-[#091B18] min-h-screen flex flex-col">
-      <div className="flex-1">
-        <Header />
-
-        <Marquee className="bg-[#0A1F1C] p-5 mb-5" gradient={false} speed={100}>
-          <div className="flex space-x-2 mx-10">
-            <h4 className="text-white font-bold">
-              Last Winner: {lastWinner?.toString()}
-            </h4>
-            <h4 className="text-white font-bold">
-              Previous winnings:{""}{" "}
-              {lastWinnerAmount &&
-                ethers.utils.formatEther(lastWinnerAmount?.toString())}
-              {""} {currency}
-            </h4>
-          </div>
-        </Marquee>
-
-        {isLotteryOperator === address && (
-          <div className="flex justify-center">
-            <AdminControls />
-          </div>
-        )}
-
-        {winnings > 0 && (
-          <div
-            className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto
-          mt-5"
-          >
-            <button
-              onClick={onWithdrawWinnings}
-              className="p-5 bg-gradient-to-b from-orange-500
-            to-emerald-500 animate-pulse text-center rounded-xl
-            w-full"
-            >
-              <p className="font-bold">Winner Winner Chicken Dinner!</p>
-              <p>
-                Total Winnings: {ethers.utils.formatEther(winnings.toString())}
-                {""}
-                {currency}
-              </p>
-              <br />
-              <p className="font-semibold">Click here to withdraw</p>
-            </button>
-          </div>
-        )}
-
-        {/*The Next Draw box*/}
-        <div
-          className="space-y-5 md:space-y-0 m-5 md:flex md:flex-row
-       items-start justify-center md:space-x-5"
-        >
-          <div className="stats-container">
-            <h1 className="text-5xl text-white font-semibold text-center">
-              The Next Draw
-            </h1>
-            <div className="flex justify-between p-2 space-x-2">
-              <div className="stats">
-                <h2 className="text-sm">Total Pool</h2>
-                <p className="text-xl">
-                  {currentWinningReward &&
-                    ethers.utils.formatEther(currentWinningReward.toString())}
-                  {""} {currency}
-                </p>
-              </div>
-              <div className="stats">
-                <h2 className="text-sm">Ticket Remaining</h2>
-                <p className="text-xl">{remainingTickets?.toNumber()}</p>
-              </div>
-            </div>
-
-            {/*Countdown timer*/}
-            <div className="mt-5 mb-3">
-              <CountdownTimer />
-            </div>
-          </div>
-          <div className="stats-container space-y-2">
-            <div className="stats-container">
-              <div
-                className="flex justify-between items-center text-white
-              pb-2"
-              >
-                <h2>Price per ticket</h2>
-                <p>
-                  {ticketPrice &&
-                    ethers.utils.formatEther(ticketPrice.toString())}
-                  {""} {currency}
-                </p>
-              </div>
-
-              <div className="flex text-white items-center space-x-2 bg-[#091b18] border-[#004337] border p-4">
-                <p>TICKETS</p>
-                <input
-                  className="flex w-full bg-transparent text-right outline-none"
-                  type="number"
-                  min={1}
-                  max={5}
-                  value={quantity}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
-                />
-              </div>
-
-              <div className="space-y-2 mt-5">
-                <div
-                  className="flex items-center justify-between
-           text-emerald-300 text-sm italic font-extrabold"
-                >
-                  <p>Total cost of tickets</p>
-                  <p>
-                    {ticketPrice &&
-                      Number(ethers.utils.formatEther(ticketPrice.toString())) *
-                        quantity}{" "}
-                    {currency}
-                  </p>
-                </div>
-
-                <div
-                  className="flex items-center justify-between
-           text-emerald-300 text-xs italic"
-                >
-                  <p>Service fees</p>
-                  <p>
-                    {ticketCommission &&
-                      ethers.utils.formatEther(ticketCommission?.toString())}
-                    {""} {currency}
-                  </p>
-                </div>
-
-                <div
-                  className="flex items-center justify-between
-           text-emerald-300 text-xs italic"
-                >
-                  <p>+ Network Fees</p>
-                  <p>TBC</p>
-                </div>
-              </div>
-
-              <button
-                disabled={
-                  expiration?.toString() < Date.now().toString() ||
-                  remainingTickets?.toNumber() === 0
-                }
-                onClick={handleClick}
-                className="mt-5 w-full bg-gradient-to-br
-              from-emerald-600 to-orange-400 px-10 py-5 rounded-md
-              font-semibold text-white shadow-xl disabled:from-gray-600
-              disaabled:text-gray-100 disabled:to-gray-600
-              disabled:cursor-not-allowed"
-              >
-                Buy {quantity} tickets for{" "}
-                {ticketPrice &&
-                  Number(ethers.utils.formatEther(ticketPrice.toString())) *
-                    quantity}{" "}
-                {currency}
-              </button>
-            </div>
-            {userTickets > 0 && (
-              <div className="stats">
-                <p className="text-lg mb-2">
-                  You have {userTickets} Tickets in this draw
-                </p>
-
-                <div className="flex max-w-sm flex-wrap gap-x-2 gap-y-2">
-                  {Array(userTickets)
-                    .fill("")
-                    .map((_, index) => (
-                      <p
-                        key={index}
-                        className="text-emerald-300 h-20 w-12
-                bg-emerald-500/30 rounded-bg flex flex-shrink-0
-                items-center justify-center text-xs italic"
-                      >
-                        {index + 1}
+    <div>
+      <Navbar />
+      <div className="color--white">
+        <div className="">
+          <div className="divider-bottom--none">
+            <div className="wrapper--inner margin--center">
+              <div className="margin-bottom--zero--tablet display--flex flex--wrap justify--space-between width--100--desktop-wide position--relative">
+                <div className="width--80--desktop-wide width--80--desktop width--80--tablet width--100--mobile padding-vertical--6xlarge padding-top--3xlarge--tablet padding-top--zero--mobile margin-top--zero--tablet padding-horizontal--large--zero margin-bottom--large margin--center padding-bottom--large--mobile margin-bottom--small--mobile padding-bottom--large">
+                  <div className="z-index--100 position--relative text--center">
+                    <h1
+                      style={{ textShadow: "2px 2px 4px #545454c4" }}
+                      className="text-6xl text-white font-semibold text-center"
+                    >
+                      ANNT - A New Nigeria Token
+                    </h1>
+                    <h1 className="margin-bottom--large font--2xlarge--tablet font--xxsmall--mobile font--display text--center--tablet margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
+                      No force on earth can stop{" "}
+                      <span className="auto-type">
+                        <Typed
+                          strings={["an IDEA", "NIGERIANS", "a NIGERIA"]}
+                          typeSpeed={200}
+                          backSpeed={100}
+                          loop
+                        />
+                      </span>{" "}
+                      whose time has come!
+                    </h1>
+                    <div className="font--medium color--text-green1-base line-height--16 text--center--tablet width--65--desktop-wide width-65--desktop width--100--tablet margin--center font-weight--small font--medium--mobile margin-bottom--2xlarge">
+                      <p>
+                        <strong>ANNT</strong> is an experimental deflationary
+                        token to explore the unlimited potential of blockchain
+                        technology, and decentralisation in a{" "}
+                        <strong>functional</strong> Nigeria.
                       </p>
-                    ))}
+                    </div>
+                    <div>
+                      <p id="text-to-copy" className="contadd">
+                        0xf951ead486490bD64193fD2ea475697a9Fd5d582
+                      </p>
+                      <div className="padding-horizontal--1xlarge--mobile display--inline-block display--block--mobile margin-left--zero margin-left--large--tablet margin-top--zero--tablet margin-top--medium--mobile">
+                        <button
+                          type="button"
+                          className="copy-btn margin-left--zero button--small1 button--white--outline link--underline--none button--pill"
+                          onClick={() =>
+                            navigator.clipboard.writeText(
+                              "0xf951ead486490bD64193fD2ea475697a9Fd5d582"
+                            )
+                          }
+                        >
+                          <img src="img/ico-copy.svg" alt="" />
+                          <span className="">Copy to Clipboard</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
+            </div>
+          </div>
+          <div className="wrapper--inner margin--center margin-top--small--mobile">
+            <div className="position--relative z-index--10 margin--center text--center margin-bottom--1xlarge">
+              <div className="margin-bottom--1xlarge--tablet color--about-bg">
+                <p
+                  className="color--text-white-base margin-top--large"
+                  style={{
+                    paddingTop: 12,
+                    paddingBottom: 12,
+                    paddingLeft: 4,
+                    paddingRight: 4,
+                  }}
+                >
+                  Want to learn more about ANNT?{" "}
+                  <a
+                    href="annt_whitepaper.pdf"
+                    target="_blank"
+                    className="link--underline color--text-white-base font-weight--bold"
+                  >
+                    Read Whitepaper
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div className="position--relative z-index--10 margin--center text--center margin-bottom--1xlarge">
+              <div className="margin-bottom--1xlarge--tablet color--motive-bg">
+                <p
+                  className="color--text-black-base"
+                  style={{
+                    paddingTop: 12,
+                    paddingBottom: 12,
+                    paddingLeft: 4,
+                    paddingRight: 4,
+                  }}
+                >
+                  Liquidity Pool locked for
+                  <strong>8 years</strong>. Don't believe us?{" "}
+                  <a
+                    href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
+                    target="_blank"
+                    className="link--underline color--text-black-base font-weight--bold"
+                  >
+                    Click me
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div className="position--relative z-index--10 margin--center text--center margin-bottom--2xlarge">
+              <div className="margin-bottom--1xlarge--tablet color--about-bg">
+                <p
+                  className="color--text-white-base"
+                  style={{
+                    paddingTop: 12,
+                    paddingBottom: 12,
+                    paddingLeft: 4,
+                    paddingRight: 4,
+                  }}
+                >
+                  Doxxed? Yes please! We believe in transparency. To see the
+                  founder and sole dev's (for now) info,{" "}
+                  <a
+                    href="https://www.linkedin.com/in/samuelobior/"
+                    target="_blank"
+                    className="link--underline color--text-white-base font-weight--bold"
+                  >
+                    Click here
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="padding-bottom--large margin-bottom--zero--tablet padding-bottom--zero--tablet"
+              style={{ marginTop: 64 }}
+            >
+              <div
+                id="about"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                style={{ marginBottom: 24 }}
+              >
+                <h2
+                  className="font-weight--bold font--3xlarge color--text-white-bright position--relative z-index--10"
+                  style={{ marginTop: 0, paddingTop: 24 }}
+                >
+                  About
+                </h2>
+              </div>
+              <div
+                className="text--center--tablet text--center--mobile line-height--16 color--about-bg padding--5xlarge box--rounded--2xlarge margin-bottom--1xlarge--tablet margin--center text--center position--relative z-index--10"
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                }}
+              >
+                <div
+                  className=" color--text-white-base display--inline-block--tablet display--inline-block--mobile display--inline-block margin-top--large position--relative z-index--10 text--left"
+                  style={{ marginTop: 0 }}
+                >
+                  <p>
+                    Welcome to <strong>ANNT - A New Nigeria Token</strong>, a
+                    Nigerian themed crypto project!
+                    <br />
+                    Our project is inspired by the{" "}
+                    <strong>coconut head generation</strong> and the current
+                    wave of the
+                    <br />
+                    inevitable revolution in the country, as the upcoming
+                    election promises a youth-motivated, fresh
+                    <br />
+                    government. One that will break away from the old order and
+                    pave the way for a new era of growth and
+                    <br />
+                    prosperity.
+                    <br />
+                    Our project is an 'experimental' deflationary token on the
+                    Binance Smart Chain, designed to promote
+                    <br />
+                    financial inclusion and decentralisation in Nigeria. With a
+                    total supply of <strong>63 million ANNT</strong> and a
+                    <br />
+                    minimum total supply of <strong>23 million</strong>, our
+                    token symbolises the hope and potential of
+                    <br />
+                    Nigeria as it celebrates its 63rd year of independence, in a
+                    revolutionary year in the history of our
+                    <br />
+                    dear country.
+                    <br />
+                    At the core of our project is a belief in the power of
+                    blockchain technology to democratise finance and
+                    <br />
+                    create a more equitable and transparent economy. We believe
+                    that by harnessing the power of
+                    <br />
+                    decentralisation, we can build a future where everyone has
+                    access to the same opportunities, regardless
+                    <br />
+                    of their background or social status.
+                    <br />
+                    As the journey progresses, our team will consist of diverse
+                    group of individuals from different
+                    <br />
+                    backgrounds, united by a shared passion for blockchain
+                    technology and a desire to make a positive impact
+                    <br /> in Nigeria.
+                    <br />
+                    We are committed to building a community around our project
+                    and welcome all those who share our vision
+                    <br />
+                    to join us on this journey.
+                    <br />
+                    If you have any questions or would like to learn more about
+                    our project, please do not hesitate to
+                    <br />
+                    reach out to us. We look forward to working with you to
+                    build a brighter future for Nigeria.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="padding-bottom--large margin-bottom--zero--tablet padding-bottom--zero--tablet"
+              style={{ marginTop: 64 }}
+            >
+              <div
+                id="motive"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                style={{ marginTop: 24 }}
+              >
+                <h2
+                  className="font-weight--bold font--3xlarge color--text-white-light position--relative z-index--10"
+                  style={{ marginTop: 32, paddingTop: 64 }}
+                >
+                  Motive
+                </h2>
+              </div>
+
+              <div
+                className="text--center--tablet text--center--mobile line-height--16 color--motive-bg padding--5xlarge box--rounded--2xlarge margin-bottom--1xlarge--tablet margin--center text--center position--relative z-index--10"
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                }}
+              >
+                <div
+                  className="color--text-black-base display--inline-block--tablet display--inline-block--mobile display--inline-block color--text-white-base margin-top--large position--relative z-index--10 text--left"
+                  style={{ marginTop: 0 }}
+                >
+                  <p>
+                    Our project, ANNT (A New Nigeria Token) is driven by a clear
+                    and ambitious motive - to empower the
+                    <br />
+                    citizens of Nigeria by providing them with access to a
+                    decentralised and transparent economy through the
+                    <br />
+                    use of blockchain technology.
+                    <br />
+                    We believe that the current financial system in Nigeria is
+                    in dire need of disruption, as it is riddled
+                    <br />
+                    with inefficiencies, lack of transparency, corruption with
+                    impunity and exclusion of large segments of
+                    <br />
+                    the population.
+                    <br />
+                    Our goal is to provide a viable alternative that addresses
+                    these issues and enables greater financial
+                    <br />
+                    inclusion for all Nigerians.
+                    <br />
+                    To that effect, we have chosen Binance Smart Chain, a
+                    high-performance blockchain network that allows
+                    <br />
+                    for fast and low-cost transactions, which is key to the
+                    future goals of this project
+                    <br />
+                    With ANNT, we aim to promote the use of cryptocurrency in
+                    Nigeria and encourage the adoption of
+                    <br />
+                    blockchain technology for various use cases. Imaagine
+                    tracking our typical road construction contracts
+                    <br />
+                    on the blockchain.
+                    <br />
+                    Our project is not just about creating a new token, it's
+                    about creating a new future for Nigeria. We
+                    <br />
+                    believe that with ANNT, we can help to build a more
+                    equitable, transparent, and decentralised economy
+                    <br />
+                    that benefits every Nigerian.
+                    <br />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="padding-bottom--large margin-bottom--zero--tablet bg--slant--investors padding-bottom--zero--tablet"
+              style={{ marginTop: 64 }}
+            >
+              <div
+                id="vision"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                style={{ marginBottom: 24 }}
+              >
+                <h2
+                  className="font-weight--bold font--3xlarge color--text-white-bright position--relative z-index--10"
+                  style={{ marginTop: 32, paddingTop: 64 }}
+                >
+                  Vision
+                </h2>
+              </div>
+
+              <div
+                className="text--center--tablet text--center--mobile line-height--16 color--about-bg padding--5xlarge box--rounded--2xlarge margin-bottom--1xlarge--tablet margin--center text--center position--relative z-index--10"
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                }}
+              >
+                <div
+                  className=" color--text-white-base display--inline-block--tablet display--inline-block--mobile display--inline-block margin-top--large position--relative z-index--10 text--left"
+                  style={{ marginTop: 0 }}
+                >
+                  <p>
+                    At ANNT, our vision is to create a new, decentralised
+                    economy in Nigeria that is inclusive, transparent,
+                    <br />
+                    and empowering for all citizens, especially those that have
+                    been at the receiving end of the ineptitudes
+                    <br />
+                    of successive government, since independence.
+                    <br />
+                    We envision a future where citizens of Nigeria have access
+                    to a decentralised and transparent economy
+                    <br />
+                    through the use of blockchain technology. ANNT will be at
+                    the forefront of this change, providing a<br />
+                    secure, fast, and low-cost means of storing and transferring
+                    value.
+                    <br />
+                    We also see ANNT as a catalyst for economic growth and
+                    development in Nigeria, by facilitating the
+                    <br />
+                    creation of new businesses and industries built on
+                    blockchain technology. We believe that the adoption
+                    <br />
+                    of ANNT and blockchain technology will lead to the creation
+                    of new job opportunities and the growth of
+                    <br />
+                    the Nigerian economy.
+                    <br />
+                    In addition, we see ANNT as a powerful tool for promoting
+                    social and economic justice in Nigeria. By
+                    <br />
+                    providing citizens with a new means of storing and
+                    transferring value, we believe that ANNT can help to
+                    <br />
+                    reduce poverty and inequality and promote greater financial
+                    inclusion for all.
+                    <br />
+                    Overall, our vision for ANNT is to empower the citizens of
+                    Nigeria to take control of their financial
+                    <br />
+                    future and build a more prosperous life for themselves and a
+                    future for their unborn generation.
+                    <br />
+                    Ultimately, to end the vicious circle of poverty, one family
+                    at a time. We are committed to making this
+                    <br />
+                    vision a reality, and we look forward to working with you to
+                    achieve it.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="tokenomics"
+              className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+              style={{ marginBottom: 24 }}
+            >
+              <h2
+                className="font-weight--bold font--3xlarge color--text-white-bright position--relative z-index--10"
+                style={{ marginTop: 32, paddingTop: 64 }}
+              >
+                Tokenomics
+              </h2>
+            </div>
+            <div className="display--flex flex--wrap justify--space-between text--center width--80--desktop-wide width--90--desktop width--100--tablet margin--center padding-vertical--large flex-direction--column--tablet">
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Total Supply
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  63m
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Min Total Supply
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  23m
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks">
+                  Max Transaction
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  50k
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Total Fees
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  4%
+                </h2>
+              </div>
+            </div>
+            <div className="display--flex flex--wrap justify--space-between text--center width--80--desktop-wide width--90--desktop width--100--tablet margin--center padding-vertical--large flex-direction--column--tablet">
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Liquidity Fee
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  1%
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Auto-Burn Fee
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  1%
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Development
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  1%{" "}
+                </h2>
+              </div>
+              <div className="width--20--desktop-wide width--20--desktop width--100--tablet margin-bottom--2xlarge--tablet">
+                <h3 className="margin-bottom--small font-weight--bold color--text-greentoks ">
+                  Charity
+                </h3>
+                <h2 className="font--7xlarge font-weight--heavy color--text-white-bright font--6xlarge--tablet">
+                  1%{" "}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="community" className="bg--slant--news">
+          <div className="wrapper--inner margin--center position--relative z-index--10">
+            <div className="padding--5xlarge padding-horizontal--zero">
+              <div
+                id="tokenomics"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                style={{ marginBottom: 24 }}
+              >
+                <h2
+                  className="font-weight--bold font--3xlarge position--relative z-index--10"
+                  style={{ marginTop: 16, paddingTop: 32, color: "#23533e" }}
+                >
+                  Community
+                </h2>
+              </div>
+
+              <div
+                className="text--center--tablet line-height--16 padding--5xlarge box--rounded--2xlarge margin-bottom--1xlarge--tablet margin--center text--center position--relative z-index--10"
+                style={{
+                  paddingTop: 16,
+                  paddingBottom: 16,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                }}
+              >
+                <div className="text--left color--text-black-base display--inline-block--tablet display--inline-block--mobile display--inline-block">
+                  <p>
+                    At ANNT, we believe that a community-driven approach is
+                    essential for the success and long-term growth
+                    <br />
+                    of our project. We are committed to building a strong and
+                    active community around ANNT and welcome all
+                    <br />
+                    individuals, regardless of their background or experience,
+                    to get involved and share their ideas and
+                    <br />
+                    suggestions with us. At intervals, we will also be running
+                    crypto education in tandem.
+                    <br />
+                    We understand that the success of our project is dependent
+                    on the engagement and support of our
+                    <br />
+                    community. That's why we are dedicated to fostering an open,
+                    transparent and inclusive environment where
+                    <br />
+                    all members can participate and contribute to the growth and
+                    development of the ANNT ecosystem.
+                    <br />
+                    One of the ways we plan to involve the community is by using
+                    a portion of our charity fee to support those in
+                    <br />
+                    need, especially community members. We believe that by
+                    giving back to the community, we can create a
+                    <br />
+                    positive impact and promote social and economic justice.
+                    <br />
+                    As the project grows, we are committed to finding new use
+                    cases for ANNT that will drive its value and
+                    <br />
+                    utility.
+                    <br />
+                    On attaining the minimum total supply, we will work closely
+                    with the community to identify new
+                    <br />
+                    opportunities and develop innovative solutions that will
+                    benefit all members of the ecosystem and
+                    <br />
+                    effectively, the value of ANNT.
+                    <br />
+                    We believe that by working together, we can truly create a
+                    decentralized economy that is inclusive,
+                    <br />
+                    transparent, and empowering for all citizens of Nigeria. We
+                    are excited to embark on this journey and
+                    <br />
+                    look forward to building a strong and vibrant community
+                    around ANNT.
+                    <br />
+                    Please do not hesitate to reach out to us with any questions
+                    or ideas you may have. We welcome all
+                    <br />
+                    members of the community to get involved and contribute to
+                    the growth and success of the ANNT project.
+                    <br />
+                    Also, if you would like to be on the team in due time, do
+                    not hesitate to email us your CV (Must be Nigerian).
+                    <br /> Recruitment announcement will be on our website when
+                    due. Thank you.
+                  </p>
+                </div>
+
+                <div className="z-index--100 position--relative text--center">
+                  <h1 className="margin-bottom--large font--2xlarge--tablet font--xsmall--mobile font--display text--center--tablet margin-bottom--1xlarge color--text-comu-base margin-top--5xlarge">
+                    This is a community different from{" "}
+                    <span className="auto-type1">
+                      <Typed
+                        strings={["BALA BLU", "BLU BLU", "BULA BA"]}
+                        typeSpeed={200}
+                        backSpeed={100}
+                        loop
+                      />
+                    </span>
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="margin-top--1xlarge padding-top--4xlarge padding-top--zero--tablet">
+          <div className="wrapper--inner margin--center margin-top--small--mobile">
+            <div className="width--80--desktop-wide width--80--desktop width-100--tablet margin--center">
+              <h2 className="font-weight--bold font--1xlarge color--text-white text--center margin-bottom--1xlarge">
+                Connect with ANNT
+              </h2>
+              <ul className="list--reset list--inline margin--center text--center font--2xlarge margin-bottom--4xlarge">
+                <li className="margin-right--large">
+                  <a
+                    href="https://twitter.com/Annt2363"
+                    target="_blank"
+                    className="color--text-comu-base"
+                  >
+                    {" "}
+                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                  </a>
+                </li>
+                <li className="margin-right--large">
+                  <a
+                    href="https://medium.com/@anntoken23"
+                    target="_blank"
+                    className="color--text-comu-base"
+                  >
+                    {" "}
+                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                  </a>
+                </li>
+                <li className="margin-right--large">
+                  <a
+                    href="https://www.instagram.com/anntoken23/"
+                    target="_blank"
+                    className="color--text-comu-base"
+                  >
+                    {" "}
+                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                  </a>
+                </li>
+                <li className="margin-right--large">
+                  <a
+                    href="https://www.facebook.com/profile.php?id=100089909078977"
+                    target="_blank"
+                    className="color--text-comu-base"
+                  >
+                    {" "}
+                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                  </a>
+                </li>
+                <li className="margin-right--zero">
+                  <a
+                    href="mailto:info@annt23.com"
+                    target="_blank"
+                    className="color--text-comu-base"
+                  >
+                    {" "}
+                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                  </a>
+                </li>
+              </ul>
+              <div className="margin--center text--center">
+                &copy; Copyright 2022{" "}
+                <strong>
+                  <span>ANNT</span>
+                </strong>
+                . All rights reserved
+              </div>
+              <div className="margin--center text--center margin-vertical--4xlarge">
+                {" "}
+                <a
+                  href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
+                  target="_blank"
+                >
+                  <img src="img/LiquidityBadgeWhite.svg" />
+                </a>{" "}
+              </div>
+              <div className="margin--center text--center margin-vertical--4xlarge">
+                <img src="img/annt_logonew.svg" width="120px" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <Head>
-        <title>ANNT Draw | Stop, when the fun stops</title>
+        <title>ANNT | A New Nigeria Token</title>
       </Head>
-      <div
-        className="border-t border-emerald-500/20
-      flex items-center text-white justify-center p-3"
-      >
-        <p className="text-xs text-emerald-700 pl-5">
-          <strong>HOW TO PLAY: </strong>Buy a max of 5 tickets per address. A
-          winner is randomly selected from the pool of addresses that buys
-          ticket, after the draw ends. At the end of each draw, login with you
-          addrress to see if you're the winner and claim winning.
-        </p>
-      </div>
-
-      <footer
-        className="border-t border-emerald-500/20
-      flex items-center text-white justify-between p-5"
-      >
-        <img
-          className="h-10 w-10 filter hue-route-90 opacity-20
-      rounded-full"
-          src="/lottery_lg-01.png"
-          alt="freepik.com"
-        />
-        <p className="text-xs text-emerald-900 pl-5">
-          <strong>DISCLAIMER: </strong>You are responsible for any decision made
-          by you based on information on this site. ANNT DRAW and its developers
-          accept no liability for loss or damage (including, without limitation,
-          any special, direct, indirect or consequential loss or damage or other
-          losses or damage of whatever kind) that arise out of or relate to the
-          use of this site or its contents. If there is any conflict between the
-          information on this site and the Rules and Procedures for ANNT DRAW
-          (as amended from time to time), the Rules and Procedures will take
-          priority.
-        </p>
-      </footer>
     </div>
   );
 };

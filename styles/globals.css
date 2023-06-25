@@ -23,6 +23,9 @@
     @apply bg-[#091f1c] p-2 flex-1 rounded-md border-[#004337]
     border-2 hover:bg-emerald-500/50;
   }
+  .buy-pancake {
+    @apply hover:bg-emerald-700;
+  }
 }
 
 .connect {
