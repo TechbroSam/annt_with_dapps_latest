@@ -11,12 +11,15 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className="grid pt-10 items-center">
+    <div className="flex pt-10 sm:pt-2 items-center width--100--mobile">
       <div className="header">
-        <div className="wrapper--inner margin--center text--center--mobile padding--zero--mobile">
+        <div className="wrapper--inner margin--center text--center--mobile">
           <div className="display--flex justify--space-between align-items--center flex--wrap">
-            <div className="width--100--mobile position--relative link--white">
-              <img src="img/annt_logonew.svg" className="header__logo" />
+            <div className="width--100--mobile wposition--relative">
+              <img
+                src="img/annt_logonew.svg"
+                className="header__logo  width-vw--100--mobile"
+              />
             </div>
             <div className="header__right margin-top--large--mobile font--small width--100--mobile position--relative">
               <ul className="list--reset">

@@ -20,11 +20,11 @@ const Home = () => {
                   <div className="z-index--100 position--relative text--center">
                     <h1
                       style={{ textShadow: "2px 2px 4px #545454c4" }}
-                      className="text-6xl text-white font-semibold text-center"
+                      className="font--7xlarge text-white font-bold text-center font--large--mobile font--4xlarge--tablet"
                     >
                       ANNT - A New Nigeria Token
                     </h1>
-                    <h1 className="margin-bottom--large font--2xlarge--tablet font--xxsmall--mobile font--display text--center--tablet margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
+                    <h1 className="font--2xlarge margin-bottom--large font--large--tablet  font--xxxsmall--mobile margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
                       No force on earth can stop{" "}
                       <span className="auto-type">
                         <Typed
@@ -48,10 +48,10 @@ const Home = () => {
                       <p id="text-to-copy" className="contadd">
                         0xf951ead486490bD64193fD2ea475697a9Fd5d582
                       </p>
-                      <div className="padding-horizontal--1xlarge--mobile display--inline-block display--block--mobile margin-left--zero margin-left--large--tablet margin-top--zero--tablet margin-top--medium--mobile">
+                      <div className="text-center padding-horizontal--1xlarge--mobile display--inline-block margin-left--zero margin-left--large--tablet margin-top--zero--tablet margin-top--medium--mobile">
                         <button
                           type="button"
-                          className="copy-btn margin-left--zero button--small1 button--white--outline link--underline--none button--pill"
+                          className="buy-pancake flex copy-btn margin-left--zero button--small1 button--white--outline link--underline--none button--pill"
                           onClick={() =>
                             navigator.clipboard.writeText(
                               "0xf951ead486490bD64193fD2ea475697a9Fd5d582"
@@ -585,7 +585,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="margin-top--1xlarge padding-top--4xlarge padding-top--zero--tablet">
+        <div className="text--center margin-top--1xlarge padding-top--4xlarge padding-top--zero--tablet">
           <div className="wrapper--inner margin--center margin-top--small--mobile">
             <div className="width--80--desktop-wide width--80--desktop width-100--tablet margin--center">
               <h2 className="font-weight--bold font--1xlarge color--text-white text--center margin-bottom--1xlarge">
@@ -656,11 +656,18 @@ const Home = () => {
                   href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
                   target="_blank"
                 >
-                  <img src="img/LiquidityBadgeWhite.svg" />
+                  <img
+                    className="liquidityimg"
+                    src="img/LiquidityBadgeWhite.svg"
+                  />
                 </a>{" "}
               </div>
               <div className="margin--center text--center margin-vertical--4xlarge">
-                <img src="img/annt_logonew.svg" width="120px" />
+                <img
+                  className="liquidityimg"
+                  src="img/annt_logonew.svg"
+                  width="120px"
+                />
               </div>
             </div>
           </div>

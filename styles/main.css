@@ -437,8 +437,6 @@ textarea {
 
 .header .header__logo {
   width: 100px;
-  position: relative;
-  top: -4px;
   height: auto;
 }
 
@@ -2285,7 +2283,6 @@ html {
 
 .font--display {
   font-weight: 500;
-  font-family: "Graphik LC Web";
   letter-spacing: -0.8px;
 }
 
@@ -2500,6 +2497,13 @@ html {
   .font--6xlarge--tablet {
     font-size: 56px;
     line-height: 1.07;
+  }
+}
+
+@media (max-width: 580px) {
+  .font--xxxsmall--mobile {
+    font-size: 10px;
+    line-height: 1.45;
   }
 }
 
@@ -8831,7 +8835,7 @@ span.copied,
 }
 
 .contadd {
-  background: linear-gradient(90deg, #fff 30%, rgba(255, 255, 255, 0) 70%);
+  background: linear-gradient(90deg, #fff 30%, rgba(255, 255, 255, 0) 60%);
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
