@@ -318,7 +318,6 @@ const Home: NextPage = () => {
         </div>
       </div>
       <Head>
-        <link rel="shortcut icon" href="/favicon.ico" />
         <title>ANNT Draw | Stop, when the fun stops</title>
       </Head>
       <div
