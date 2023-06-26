@@ -15,7 +15,7 @@ function Login() {
       <div className="flex flex-col items-center mb-10">
         <img
           className="h-56 w-56 mb-10"
-          src="/lottery_lg-01.png"
+          src="/lottery_lgnew.png"
           alt="freepik.com"
         />
         <h1 className="text-6xl text-white font-bold">THE ANNT DRAW</h1>

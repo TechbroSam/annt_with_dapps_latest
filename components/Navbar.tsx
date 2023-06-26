@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import "../styles/main.css";
-import "../styles/bootstrap.min.css";
 
 {
   /*import { Link } from 'react-scroll';*/
@@ -11,7 +9,7 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className="flex pt-10 sm:pt-2 items-center width--100--mobile">
+    <div className="flex mt-4 sm:pt-2 items-center width--100--mobile">
       <div className="header">
         <div className="wrapper--inner margin--center text--center--mobile">
           <div className="display--flex justify--space-between align-items--center flex--wrap">

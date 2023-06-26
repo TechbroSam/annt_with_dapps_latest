@@ -12,7 +12,7 @@ function Header() {
       <div className="flex items-center space-x-2">
         <img
           className="rouded-full h-20 w-20"
-          src="/lottery_lg-01.png"
+          src="/lottery_lgnew.png"
           alt=""
         />
         <div>

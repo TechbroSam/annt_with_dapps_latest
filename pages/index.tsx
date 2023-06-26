@@ -2,10 +2,6 @@ import React from "react";
 import Typed from "react-typed";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
-import "../styles/main.css";
-import "../styles/main.css";
-
-import { ArrowUturnDownIcon } from "@heroicons/react/24/solid";
 
 const Home = () => {
   return (
@@ -24,7 +20,7 @@ const Home = () => {
                     >
                       ANNT - A New Nigeria Token
                     </h1>
-                    <h1 className="font--2xlarge margin-bottom--large font--large--tablet  font--xxxsmall--mobile margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
+                    <h1 className="font-bold font--2xlarge margin-bottom--large font--large--tablet font--xxxsmall--mobile margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
                       No force on earth can stop{" "}
                       <span className="auto-type">
                         <Typed
@@ -586,71 +582,84 @@ const Home = () => {
           </div>
         </div>
         <div className="text--center margin-top--1xlarge padding-top--4xlarge padding-top--zero--tablet">
-          <div className="wrapper--inner margin--center margin-top--small--mobile">
+          <div className="wrapper--inner margin--center">
             <div className="width--80--desktop-wide width--80--desktop width-100--tablet margin--center">
-              <h2 className="font-weight--bold font--1xlarge color--text-white text--center margin-bottom--1xlarge">
+              <h2 className="font-bold font--1xlarge color--text-white text--cente margin-bottom--1xlarge">
                 Connect with ANNT
               </h2>
               <ul className="list--reset list--inline margin--center text--center font--2xlarge margin-bottom--4xlarge">
                 <li className="margin-right--large">
-                  <a
-                    href="https://twitter.com/Annt2363"
-                    target="_blank"
-                    className="color--text-comu-base"
-                  >
+                  <a href="https://twitter.com/Annt2363" target="_blank">
                     {" "}
-                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                    <img
+                      src="img/twitter.svg"
+                      alt="Twitter"
+                      className="h-8 mx-auto mb-2"
+                    />
                   </a>
                 </li>
                 <li className="margin-right--large">
-                  <a
-                    href="https://medium.com/@anntoken23"
-                    target="_blank"
-                    className="color--text-comu-base"
-                  >
+                  <a href="https://medium.com/@anntoken23" target="_blank">
                     {" "}
-                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                    <img
+                      src="img/medium.svg"
+                      alt="Twitter"
+                      className="h-8 mx-auto mb-2"
+                    />
                   </a>
                 </li>
                 <li className="margin-right--large">
                   <a
                     href="https://www.instagram.com/anntoken23/"
                     target="_blank"
-                    className="color--text-comu-base"
                   >
                     {" "}
-                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                    <img
+                      src="img/instagram.svg"
+                      alt="Twitter"
+                      className="h-8 mx-auto mb-2"
+                    />
                   </a>
                 </li>
                 <li className="margin-right--large">
                   <a
                     href="https://www.facebook.com/profile.php?id=100089909078977"
                     target="_blank"
-                    className="color--text-comu-base"
                   >
                     {" "}
-                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                    <img
+                      src="img/facebook.svg"
+                      alt="Twitter"
+                      className="h-8 mx-auto mb-2"
+                    />
                   </a>
                 </li>
                 <li className="margin-right--zero">
-                  <a
-                    href="mailto:info@annt23.com"
-                    target="_blank"
-                    className="color--text-comu-base"
-                  >
+                  <a href="mailto:info@annt23.com" target="_blank">
                     {" "}
-                    <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
+                    <img
+                      src="img/mail-32.png"
+                      alt="Twitter"
+                      className="h-8 mx-auto mb-2"
+                    />
                   </a>
                 </li>
               </ul>
-              <div className="margin--center text--center">
-                &copy; Copyright 2022{" "}
-                <strong>
-                  <span>ANNT</span>
-                </strong>
-                . All rights reserved
+
+              <div className="margin--center text--center margin-vertical--1xlarge">
+                {" "}
+                <a
+                  href="https://bscscan.com/token/0xf951ead486490bd64193fd2ea475697a9fd5d582"
+                  target="_blank"
+                >
+                  <img
+                    className="liquidityimg"
+                    src="img/bscscan-logo.svg"
+                    width="120px"
+                  />
+                </a>{" "}
               </div>
-              <div className="margin--center text--center margin-vertical--4xlarge">
+              <div className="margin--center text--center margin-vertical--1xlarge">
                 {" "}
                 <a
                   href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
@@ -662,7 +671,14 @@ const Home = () => {
                   />
                 </a>{" "}
               </div>
-              <div className="margin--center text--center margin-vertical--4xlarge">
+              <div className="margin--center text--center margin-vertical--1xlarge">
+                &copy; Copyright 2022{" "}
+                <strong>
+                  <span>ANNT</span>
+                </strong>
+                . All rights reserved
+              </div>
+              <div className="margin--center text--center margin-vertical--1xlarge margin-bottom--6xlarge">
                 <img
                   className="liquidityimg"
                   src="img/annt_logonew.svg"
