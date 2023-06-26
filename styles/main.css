@@ -8835,12 +8835,12 @@ span.copied,
 }
 
 @media (min-width: 640px) {
-  .mdcontainer {
+  .sdcontainer {
     max-width: 401px;
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 810px) {
   .mdcontainer {
     max-width: 401px;
   }

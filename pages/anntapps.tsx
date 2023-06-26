@@ -19,7 +19,7 @@ const Anntapps = () => {
           </div>
         </div>
 
-        <div className="sm:container mx-auto md:mx-1 max-sm:w-8/12 mdcontainer">
+        <div className="sm:container mx-auto md:mx-1 max-sm:w-8/12 max-md:w-2/12 mdcontainer">
           <div className="flex-1 md:flex text-center justify-center md:space-x-5 mx-auto">
             <div className="col-xl-3 col-sm-6 mb-5 anntappcard">
               <a href="/draw" target="_blank">
