@@ -8489,7 +8489,7 @@ html.remodal-is-locked {
   .bg--slant--news:after {
     transform: rotate(0deg);
     left: 0;
-    height: 2200px;
+    height: 1900px;
     width: 100%;
   }
 }
@@ -8834,6 +8834,18 @@ span.copied,
   }
 }
 
+@media (min-width: 640px) {
+  .mdcontainer {
+    max-width: 401px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mdcontainer {
+    max-width: 401px;
+  }
+}
+
 .contadd {
   background: linear-gradient(90deg, #fff 30%, rgba(255, 255, 255, 0) 60%);
   -webkit-text-fill-color: transparent;
@@ -8858,4 +8870,8 @@ span.copied,
 
 .anntappcard:hover {
   transform: translate(-0.3rem, -0.3rem);
+}
+
+.shadow-mm {
+  box-shadow: 0 0.127rem 0.27rem rgba(0, 0, 0, 0.175);
 }

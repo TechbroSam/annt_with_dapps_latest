@@ -186,7 +186,7 @@ const Home: NextPage = () => {
         {/*The Next Draw box*/}
         <div
           className="space-y-5 md:space-y-0 m-5 md:flex md:flex-row
-       items-start justify-center md:space-x-5"
+          items-start justify-center md:space-x-5"
         >
           <div className="stats-container">
             <h1 className="text-5xl text-white font-semibold text-center">
@@ -339,7 +339,7 @@ const Home: NextPage = () => {
         <img
           className="h-10 w-10 filter hue-route-90 opacity-20
       rounded-full"
-          src="/lottery_lg-01.png"
+          src="/lottery_lgnew.png"
           alt="freepik.com"
         />
         <p className="text-xs text-emerald-900 pl-5">
