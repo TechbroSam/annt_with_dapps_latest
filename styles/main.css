@@ -55,6 +55,7 @@ template,
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  text-decoration: none;
 }
 
 a:active,
@@ -3658,7 +3659,7 @@ a:hover {
 }
 
 a.link--underline {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a.link--underline--none {

@@ -88,7 +88,7 @@ const Home = () => {
                     target="_blank"
                     className="link--underline color--text-white-base font-weight--bold"
                   >
-                    Read Whitepaper
+                    <strong>Read Whitepaper</strong>
                   </a>
                 </p>
               </div>
@@ -106,13 +106,13 @@ const Home = () => {
                   }}
                 >
                   Liquidity Pool locked for
-                  <strong>8 years</strong>. Don't believe us?{" "}
+                  <strong> 8 years</strong>. Don&apos;t believe us?{" "}
                   <a
                     href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
                     target="_blank"
                     className="link--underline color--text-black-base font-weight--bold"
                   >
-                    Click me
+                    <strong>Click me</strong>
                   </a>
                 </p>
               </div>
@@ -130,13 +130,13 @@ const Home = () => {
                   }}
                 >
                   Doxxed? Yes please! We believe in transparency. To see the
-                  founder and sole dev's (for now) info,{" "}
+                  founder and sole dev&apos;s (for now) info,{" "}
                   <a
                     href="https://www.linkedin.com/in/samuelobior/"
                     target="_blank"
                     className="link--underline color--text-white-base font-weight--bold"
                   >
-                    Click here
+                    <strong>Click here</strong>
                   </a>
                 </p>
               </div>
@@ -187,7 +187,7 @@ const Home = () => {
                     <br />
                     prosperity.
                     <br />
-                    Our project is an 'experimental' deflationary token on the
+                    Our project is an experimental deflationary token on the
                     Binance Smart Chain, designed to promote
                     <br />
                     financial inclusion and decentralisation in Nigeria. With a
@@ -300,7 +300,7 @@ const Home = () => {
                     <br />
                     on the blockchain.
                     <br />
-                    Our project is not just about creating a new token, it's
+                    Our project is not just about creating a new token, it is
                     about creating a new future for Nigeria. We
                     <br />
                     believe that with ANNT, we can help to build a more
@@ -521,8 +521,8 @@ const Home = () => {
                     We understand that the success of our project is dependent
                     on the engagement and support of our
                     <br />
-                    community. That's why we are dedicated to fostering an open,
-                    transparent and inclusive environment where
+                    community. That is why we are dedicated to fostering an
+                    open, transparent and inclusive environment where
                     <br />
                     all members can participate and contribute to the growth and
                     development of the ANNT ecosystem.

@@ -328,7 +328,7 @@ const Home: NextPage = () => {
           <strong>HOW TO PLAY: </strong>Buy a max of 5 tickets per address. A
           winner is randomly selected from the pool of addresses that buys
           ticket, after the draw ends. At the end of each draw, login with you
-          addrress to see if you're the winner and claim winning.
+          addrress to see if you are the winner and claim winning.
         </p>
       </div>
 
