@@ -2,6 +2,7 @@ import React from "react";
 import Typed from "react-typed";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -54,7 +55,12 @@ const Home = () => {
                             )
                           }
                         >
-                          <img src="img/ico-copy.svg" alt="" />
+                          <Image
+                            src="img/ico-copy.svg"
+                            width="16"
+                            height="16"
+                            alt=""
+                          />
                           <span className="">Copy to Clipboard</span>
                         </button>
                       </div>
@@ -591,20 +597,24 @@ const Home = () => {
                 <li className="margin-right--large">
                   <a href="https://twitter.com/Annt2363" target="_blank">
                     {" "}
-                    <img
+                    <Image
                       src="img/twitter.svg"
                       alt="Twitter"
                       className="h-8 mx-auto mb-2"
+                      width="32"
+                      height="0"
                     />
                   </a>
                 </li>
                 <li className="margin-right--large">
                   <a href="https://medium.com/@anntoken23" target="_blank">
                     {" "}
-                    <img
+                    <Image
                       src="img/medium.svg"
-                      alt="Twitter"
+                      alt="Medium"
                       className="h-8 mx-auto mb-2"
+                      width="32"
+                      height="0"
                     />
                   </a>
                 </li>
@@ -614,10 +624,12 @@ const Home = () => {
                     target="_blank"
                   >
                     {" "}
-                    <img
+                    <Image
                       src="img/instagram.svg"
-                      alt="Twitter"
+                      alt="Instagram"
                       className="h-8 mx-auto mb-2"
+                      width="32"
+                      height="0"
                     />
                   </a>
                 </li>
@@ -627,20 +639,24 @@ const Home = () => {
                     target="_blank"
                   >
                     {" "}
-                    <img
+                    <Image
                       src="img/facebook.svg"
-                      alt="Twitter"
+                      alt="Facebook"
                       className="h-8 mx-auto mb-2"
+                      width="32"
+                      height="0"
                     />
                   </a>
                 </li>
                 <li className="margin-right--zero">
                   <a href="mailto:info@annt23.com" target="_blank">
                     {" "}
-                    <img
-                      src="img/mail-32.png"
-                      alt="Twitter"
+                    <Image
+                      src="/img/mail-32.png"
+                      alt="Mail"
                       className="h-8 mx-auto mb-2"
+                      width="32"
+                      height="0"
                     />
                   </a>
                 </li>
@@ -652,10 +668,12 @@ const Home = () => {
                   href="https://bscscan.com/token/0xf951ead486490bd64193fd2ea475697a9fd5d582"
                   target="_blank"
                 >
-                  <img
+                  <Image
                     className="liquidityimg"
                     src="img/bscscan-logo.svg"
-                    width="120px"
+                    width="120"
+                    height="0"
+                    alt=""
                   />
                 </a>{" "}
               </div>
@@ -665,9 +683,12 @@ const Home = () => {
                   href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
                   target="_blank"
                 >
-                  <img
+                  <Image
                     className="liquidityimg"
                     src="img/LiquidityBadgeWhite.svg"
+                    width="240"
+                    height="0"
+                    alt=""
                   />
                 </a>{" "}
               </div>
@@ -679,10 +700,12 @@ const Home = () => {
                 . All rights reserved
               </div>
               <div className="margin--center text--center margin-vertical--1xlarge margin-bottom--6xlarge">
-                <img
+                <Image
                   className="liquidityimg"
                   src="img/annt_logonew.svg"
-                  width="120px"
+                  width="120"
+                  height="0"
+                  alt=""
                 />
               </div>
             </div>
