@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 {
   /*import { Link } from 'react-scroll';*/
@@ -14,9 +15,12 @@ const Navbar = () => {
         <div className="wrapper--inner margin--center text--center--mobile">
           <div className="display--flex justify--space-between align-items--center flex--wrap">
             <div className="width--100--mobile wposition--relative">
-              <img
+              <Image
                 src="img/annt_logonew.svg"
-                className="header__logo  width-vw--100--mobile"
+                className="header__logo"
+                width="0"
+                height="0"
+                alt=""
               />
             </div>
             <div className="header__right margin-top--large--mobile font--small width--100--mobile position--relative">

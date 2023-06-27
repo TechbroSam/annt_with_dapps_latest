@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { useState } from "react";
+import Image from "next/image";
 
 const Anntapps = () => {
   return (
@@ -20,10 +21,12 @@ const Anntapps = () => {
         <div className="container mx-auto p-1 flex flex-wrap items-center md:gap-2 lg:gap-2 justify-center">
           <a href="/draw" target="_blank">
             <div className="img-fluid md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center anntappcard rounded-lg">
-              <img
-                src="img/lottery_lg-01.png"
+              <Image
+                src="/img/lottery_lg-01.png"
                 alt=""
                 className="img-fluid w-60 liquidityimg"
+                width="240"
+                height="0"
               />
               <h4 className=" text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
                 LOTTERY
@@ -31,10 +34,12 @@ const Anntapps = () => {
             </div>
           </a>
           <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
-            <img
-              src="img/crowdfund-01.png"
+            <Image
+              src="/img/crowdfund-01.png"
               alt=""
               className="img-fluid w-60 liquidityimg"
+              width="240"
+              height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
               CROWDFUNDING
@@ -42,10 +47,12 @@ const Anntapps = () => {
           </div>
 
           <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
-            <img
-              src="img/voting-01.png"
+            <Image
+              src="/img/voting-01.png"
               alt=""
               className="img-fluid w-60 liquidityimg"
+              width="240"
+              height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
               VOTING
@@ -53,10 +60,12 @@ const Anntapps = () => {
           </div>
 
           <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
-            <img
-              src="img/dexedin-01.png"
+            <Image
+              src="/img/dexedin-01.png"
               alt=""
               className="img-fluid w-60 liquidityimg "
+              width="240"
+              height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
               DEXEDIN
@@ -64,10 +73,12 @@ const Anntapps = () => {
           </div>
 
           <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
-            <img
-              src="img/dexbrary-01.png"
+            <Image
+              src="/img/dexbrary-01.png"
               alt=""
               className="img-fluid w-60 liquidityimg"
+              width="240"
+              height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
               DEXBRARY
@@ -75,10 +86,12 @@ const Anntapps = () => {
           </div>
 
           <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
-            <img
-              src="img/tindex-01.png"
+            <Image
+              src="/img/tindex-01.png"
               alt=""
               className="img-fluid w-60 liquidityimg"
+              width="240"
+              height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
               DEXOCIAL
@@ -97,30 +110,36 @@ const Anntapps = () => {
               <li className="margin-right--large">
                 <a href="https://twitter.com/Annt2363" target="_blank">
                   {" "}
-                  <img
+                  <Image
                     src="img/twitter.svg"
                     alt="Twitter"
                     className="h-8 mx-auto mb-2"
+                    width="32"
+                    height="0"
                   />
                 </a>
               </li>
               <li className="margin-right--large">
                 <a href="https://medium.com/@anntoken23" target="_blank">
                   {" "}
-                  <img
+                  <Image
                     src="img/medium.svg"
-                    alt="Twitter"
+                    alt="Medium"
                     className="h-8 mx-auto mb-2"
+                    width="32"
+                    height="0"
                   />
                 </a>
               </li>
               <li className="margin-right--large">
                 <a href="https://www.instagram.com/anntoken23/" target="_blank">
                   {" "}
-                  <img
+                  <Image
                     src="img/instagram.svg"
-                    alt="Twitter"
+                    alt="Instagram"
                     className="h-8 mx-auto mb-2"
+                    width="32"
+                    height="0"
                   />
                 </a>
               </li>
@@ -130,20 +149,24 @@ const Anntapps = () => {
                   target="_blank"
                 >
                   {" "}
-                  <img
+                  <Image
                     src="img/facebook.svg"
-                    alt="Twitter"
+                    alt="Facebook"
                     className="h-8 mx-auto mb-2"
+                    width="32"
+                    height="0"
                   />
                 </a>
               </li>
               <li className="margin-right--zero">
                 <a href="mailto:info@annt23.com" target="_blank">
                   {" "}
-                  <img
-                    src="img/mail-32.png"
-                    alt="Twitter"
+                  <Image
+                    src="/img/mail-32.png"
+                    alt="Mail"
                     className="h-8 mx-auto mb-2"
+                    width="32"
+                    height="0"
                   />
                 </a>
               </li>
@@ -155,10 +178,12 @@ const Anntapps = () => {
                 href="https://bscscan.com/token/0xf951ead486490bd64193fd2ea475697a9fd5d582"
                 target="_blank"
               >
-                <img
+                <Image
                   className="liquidityimg"
                   src="img/bscscan-logo.svg"
-                  width="120px"
+                  width="120"
+                  height="0"
+                  alt=""
                 />
               </a>{" "}
             </div>
@@ -168,9 +193,12 @@ const Anntapps = () => {
                 href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
                 target="_blank"
               >
-                <img
+                <Image
                   className="liquidityimg"
                   src="img/LiquidityBadgeWhite.svg"
+                  width="240"
+                  height="0"
+                  alt=""
                 />
               </a>{" "}
             </div>
@@ -182,10 +210,12 @@ const Anntapps = () => {
               . All rights reserved
             </div>
             <div className="margin--center text--center margin-vertical--1xlarge margin-bottom--6xlarge">
-              <img
+              <Image
                 className="liquidityimg"
                 src="img/annt_logonew.svg"
-                width="120px"
+                width="120"
+                height="0"
+                alt=""
               />
             </div>
           </div>
