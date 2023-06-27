@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-};
 
-module.exports = {
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,
@@ -18,3 +16,5 @@ module.exports = {
   use: ["style-loader", "css-loader", "sass-loader"],
   exclude: [/node_modules/],
 };
+
+module.exports = nextConfig;
