@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Header from "@/components/Header";
 import { NextPage } from "next";
+import Image from "next/image";
+
 import {
   useContract,
   useDisconnect,
@@ -336,11 +338,13 @@ const Home: NextPage = () => {
         className="border-t border-emerald-500/20
       flex items-center text-white justify-between p-5"
       >
-        <img
+        <Image
           className="h-10 w-10 filter hue-route-90 opacity-20
       rounded-full"
           src="/lottery_lgnew.png"
-          alt="freepik.com"
+          alt=""
+          width="40"
+          height="40"
         />
         <p className="text-xs text-emerald-900 pl-5">
           <strong>DISCLAIMER: </strong>You are responsible for any decision made

@@ -2,6 +2,7 @@ import React from "react";
 import NavButton from "./NavButton";
 import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
 import { useAddress, useDisconnect } from "@thirdweb-dev/react";
+import Image from "next/image";
 
 function Header() {
   const address = useAddress();
@@ -10,10 +11,12 @@ function Header() {
   return (
     <header className="grid grid-cols-2 md:grid-cols-5 justify-between items-center p-5">
       <div className="flex items-center space-x-2">
-        <img
+        <Image
           className="rouded-full h-20 w-20"
           src="/lottery_lgnew.png"
           alt=""
+          width="80"
+          height="80"
         />
         <div>
           <h1 className="text-lg text-white font-bold">ANNT DRAW</h1>
