@@ -32,6 +32,11 @@
   }
 }
 
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
 .liquidityimg {
   display: inline-block !important;
 }

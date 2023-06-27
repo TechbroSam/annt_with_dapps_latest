@@ -4,100 +4,85 @@ import React, { useState } from "react";
 const Anntapps = () => {
   return (
     <div style={{ marginTop: 64 }}>
-      <div>
-        <div className="container mx-auto py-5">
-          <div className="row text-center text-white">
-            <div className="col-lg-8 mx-auto">
-              <h1 className="display-4 color--text-comu-base">
-                <strong>anntAPPS</strong>
-              </h1>
-              <p className="color--text-comu-base lead mb-0">
-                Pioneering crypto and blockchain technology in Nigeria, one Dapp
-                at a time.
-              </p>
-            </div>
+      <div className="pb-40">
+        <div className="container mx-auto pb-20">
+          <div className="mx-auto text-center">
+            <h1 className="text-[#23533e] text-4xl font-semi-bold">
+              <strong>anntAPPS</strong>
+            </h1>
+            <p className="text-[#23533e] text-sm pt-1">
+              Pioneering crypto and blockchain technology in Nigeria, one Dapp
+              at a time.
+            </p>
           </div>
         </div>
 
-        <div className="sm:container mx-auto md:mx-1 max-sm:w-8/12 max-md:w-2/12 mdcontainer">
-          <div className="flex-1 md:flex text-center justify-center md:space-x-5 mx-auto">
-            <div className="col-xl-3 col-sm-6 mb-5 anntappcard">
-              <a href="/draw" target="_blank">
-                <div className="shadow-mm py-5 px-4">
-                  <img
-                    src="img/lottery_lg-01.png"
-                    alt=""
-                    width="200"
-                    className="img-fluid mb-3 liquidityimg"
-                  />
-                  <h4 className="mb-0 color--text-comu-base"> LOTTERY</h4>
-                </div>
-              </a>
+        <div className="container mx-auto p-1 flex flex-wrap items-center md:gap-2 lg:gap-2 justify-center">
+          <a href="/draw" target="_blank">
+            <div className="img-fluid md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center anntappcard rounded-lg">
+              <img
+                src="img/lottery_lg-01.png"
+                alt=""
+                className="img-fluid w-60 liquidityimg"
+              />
+              <h4 className=" text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+                LOTTERY
+              </h4>
             </div>
-
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <div className="shadow-mm py-5 px-4">
-                <img
-                  src="img/crowdfund-01.png"
-                  alt=""
-                  width="200"
-                  className="img-fluid mb-3 liquidityimg"
-                />
-                <h4 className="mb-0 color--white">CROWDFUNDING</h4>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <div className="rounded shadow-mm py-5 px-4 text-center justify-center">
-                <img
-                  src="img/voting-01.png"
-                  alt=""
-                  width="200"
-                  className="img-fluid mb-3 liquidityimg"
-                />
-                <h4 className="mb-0 color--text-comu-base">VOTING</h4>
-              </div>
-            </div>
+          </a>
+          <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
+            <img
+              src="img/crowdfund-01.png"
+              alt=""
+              className="img-fluid w-60 liquidityimg"
+            />
+            <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+              CROWDFUNDING
+            </h4>
           </div>
-        </div>
 
-        <div className="sm:container mx-auto max-sm:w-8/12 mdcontainer">
-          <div className="flex-1 md:flex text-center justify-center md:space-x-5">
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <div className="rounded shadow-mm py-5 px-4">
-                <img
-                  src="img/dexedin-01.png"
-                  alt=""
-                  width="200"
-                  className="img-fluid mb-3 liquidityimg "
-                />
-                <h4 className="mb-0 color--text-comu-base">DEXEDIN</h4>
-              </div>
-            </div>
+          <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
+            <img
+              src="img/voting-01.png"
+              alt=""
+              className="img-fluid w-60 liquidityimg"
+            />
+            <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+              VOTING
+            </h4>
+          </div>
 
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <div className="rounded shadow-mm py-5 px-4">
-                <img
-                  src="img/dexbrary-01.png"
-                  alt=""
-                  width="200"
-                  className="img-fluid mb-3 liquidityimg"
-                />
-                <h4 className="mb-0 color--white">DEXBRARY</h4>
-              </div>
-            </div>
+          <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
+            <img
+              src="img/dexedin-01.png"
+              alt=""
+              className="img-fluid w-60 liquidityimg "
+            />
+            <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+              DEXEDIN
+            </h4>
+          </div>
 
-            <div className="col-xl-3 col-sm-6 mb-5">
-              <div className="rounded shadow-mm py-5 px-4">
-                <img
-                  src="img/tindex-01.png"
-                  alt=""
-                  width="200"
-                  className="img-fluid mb-3 liquidityimg"
-                />
-                <h4 className="mb-0 color--text-comu-base">DEXOCIAL</h4>
-              </div>
-            </div>
+          <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
+            <img
+              src="img/dexbrary-01.png"
+              alt=""
+              className="img-fluid w-60 liquidityimg"
+            />
+            <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+              DEXBRARY
+            </h4>
+          </div>
+
+          <div className="md:w-80 sm:max-w-xs shadow-lg py-5 px-4 text-center justify-center rounded-lg">
+            <img
+              src="img/tindex-01.png"
+              alt=""
+              className="img-fluid w-60 liquidityimg"
+            />
+            <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
+              DEXOCIAL
+            </h4>
           </div>
         </div>
       </div>
