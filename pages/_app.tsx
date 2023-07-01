@@ -7,7 +7,7 @@ import "@/styles/style.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThirdwebProvider activeChain="Binance Smart Chain">
+    <ThirdwebProvider activeChain="binance">
       <Component {...pageProps} />
       <Toaster />
     </ThirdwebProvider>
