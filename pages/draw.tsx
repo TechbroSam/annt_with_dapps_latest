@@ -173,7 +173,7 @@ const Home: NextPage = () => {
             to-emerald-500 animate-pulse text-center rounded-xl
             w-full"
             >
-              <p className="font-bold">Winner Winner Chicken Dinner!</p>
+              <p className="font-bold">Congratulations You are the Winner!</p>
               <p>
                 Total Winnings: {ethers.utils.formatEther(winnings.toString())}
                 {""}

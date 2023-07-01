@@ -1,13 +1,10 @@
 import React from "react";
 import Head from "next/head";
-import { useMetamask } from "@thirdweb-dev/react";
 
 import { ConnectWallet } from "@thirdweb-dev/react";
 import Image from "next/image";
 
 function Login() {
-  const connectWithMetamask = useMetamask();
-
   return (
     <div
       className="bg-[#091b18] min-h-screen flex flex-col 
