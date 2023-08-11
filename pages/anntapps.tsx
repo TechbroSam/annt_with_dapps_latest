@@ -94,7 +94,7 @@ const Anntapps = () => {
               height="0"
             />
             <h4 className="text-white text-lg font-bold antialiased md:subpixel-antialiased mt-3">
-              DEXOCIAL
+              XOCIAL
             </h4>
           </div>
         </div>
