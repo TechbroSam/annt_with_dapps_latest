@@ -1,29 +1,29 @@
 import React from "react";
 import Typed from "react-typed";
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar1";
 import Image from "next/image";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className="color--white">
+      <div className="color--white -z-0 md:mt-10 mt-12">
         <div className="">
           <div className="divider-bottom--none">
             <div className="wrapper--inner margin--center">
               <div className="margin-bottom--zero--tablet display--flex flex--wrap justify--space-between width--100--desktop-wide position--relative">
                 <div className="width--80--desktop-wide width--80--desktop width--80--tablet width--100--mobile padding-vertical--6xlarge padding-top--3xlarge--tablet padding-top--zero--mobile margin-top--zero--tablet padding-horizontal--large--zero margin-bottom--large margin--center padding-bottom--large--mobile margin-bottom--small--mobile padding-bottom--large">
-                  <div className="z-index--100 position--relative text--center">
+                  <div className="position--relative text--center">
                     <h1
                       style={{ textShadow: "2px 2px 4px #545454c4" }}
                       className="font--7xlarge text-white font-bold text-center font--large--mobile font--4xlarge--tablet"
                     >
                       ANNT - A New Nigeria Token
                     </h1>
-                    <h1 className="font-bold font--2xlarge margin-bottom--large font--large--tablet font--xxxsmall--mobile margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
+                    <h1 className="font-bold md:text-base text-[9px] margin-bottom--large margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
                       No force on earth can stop{" "}
-                      <span className="auto-type">
+                      <span className="auto-type text-[10px] md:text-lg">
                         <Typed
                           strings={["an IDEA", "NIGERIANS", "a NIGERIA"]}
                           typeSpeed={200}
@@ -148,7 +148,7 @@ const Home = () => {
             >
               <div
                 id="about"
-                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--zero--tablet"
                 style={{ marginBottom: 24 }}
               >
                 <h2
@@ -240,7 +240,7 @@ const Home = () => {
             >
               <div
                 id="motive"
-                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 margin-bottom--3xlarge margin-bottom--zero--tablet"
+                className="width--100--desktop-wide width--100--desktop-wide text--center position--relative z-index--10 mb-6"
                 style={{ marginTop: 24 }}
               >
                 <h2
@@ -589,7 +589,7 @@ const Home = () => {
         </div>
         <div className="text--center margin-top--1xlarge padding-top--4xlarge padding-top--zero--tablet">
           <div className="wrapper--inner margin--center">
-            <div className="width--80--desktop-wide width--80--desktop width-100--tablet margin--center">
+            <div className="width--80--desktop-wide width--80--desktop width-100--tablet margin--center mt-16 md:mt-0">
               <h2 className="font-bold font--1xlarge color--text-white text--cente margin-bottom--1xlarge">
                 Connect with ANNT
               </h2>
