@@ -75,9 +75,10 @@ const MobileNav: React.FC<NavbarProps> = ({ open, setOpen }) => {
         >
           Community
         </a>
-        <a
+        <Link
           className="text-xl font-bold my-4 ulnav"
           href="/anntapps"
+          target="_blank"
           onClick={() =>
             setTimeout(() => {
               setOpen(!open);
@@ -85,7 +86,7 @@ const MobileNav: React.FC<NavbarProps> = ({ open, setOpen }) => {
           }
         >
           AnntAPPS
-        </a>
+        </Link>
         <a
           href="https://pancakeswap.finance/swap?outputCurrency=0xf951ead486490bD64193fD2ea475697a9Fd5d582"
           target="_blank"
