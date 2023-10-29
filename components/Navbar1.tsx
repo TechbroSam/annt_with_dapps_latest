@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface NavbarProps {
   open: boolean;
@@ -156,11 +157,11 @@ export default function Navbar() {
             <a href="#community">
               <ul className="ulnav mx-4 md:text-xs lg:text-base">Community</ul>
             </a>
-            <a href="/anntapps" target="_blank">
+            <Link href="/anntapps" target="_blank">
               <ul className="ulnav mx-4 md:text-xs lg:text-base font-bold">
                 AnntAPPS
               </ul>
-            </a>
+            </Link>
           </div>
           <a
             href="https://pancakeswap.finance/swap?outputCurrency=0xf951ead486490bD64193fD2ea475697a9Fd5d582"
