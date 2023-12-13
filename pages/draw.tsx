@@ -27,8 +27,9 @@ const Home: NextPage = () => {
 
   const [quantity, setQuantity] = useState<number>(1);
 
-  const { contract, isLoading } =
-    useContract( 0xe232c52d0438f605298c0f8faea845cd88d8e1de );
+  const { contract, isLoading } = useContract(
+    "0xe232c52d0438f605298c0f8faea845cd88d8e1de"
+  );
 
   const { data: remainingTickets } = useContractRead(
     contract,
