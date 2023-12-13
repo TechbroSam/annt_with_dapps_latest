@@ -1,12 +1,10 @@
 import React from "react";
 import Head from "next/head";
-import { useMetamask } from "@thirdweb-dev/react";
-
 import { ConnectWallet } from "@thirdweb-dev/react";
 import Image from "next/image";
 
 function Login() {
-  const connectWithMetamask = useMetamask();
+  
 
   return (
     <div
@@ -23,7 +21,7 @@ function Login() {
         />
         <h1 className="text-6xl text-white font-bold">THE ANNT DRAW</h1>
         <h2 className="text-white">Get Started By Connecting to your Wallet</h2>
-        <ConnectWallet className="connect" />
+        <ConnectWallet className="connect"/>;
       </div>
       <Head>
         <title>ANNT Draw | Stop, when the fun stops</title>
