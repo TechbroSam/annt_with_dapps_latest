@@ -16,7 +16,7 @@ function Loading() {
           src="/lottery_lgnew.png"
           alt="freepik.com"
         />
-        <h1 className="text=lg text-white font-bold max-sm:text-sm">
+        <h1 className="text-lg text-white font-bold max-sm:text-sm">
           Loading the ANNT DRAW
         </h1>
       </div>

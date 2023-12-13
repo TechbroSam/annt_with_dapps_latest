@@ -17,6 +17,7 @@ import { currency } from "@/constants";
 import toast from "react-hot-toast";
 
 function AdminControls() {
+  
   const { contract, isLoading } = useContract(
     process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
   );
