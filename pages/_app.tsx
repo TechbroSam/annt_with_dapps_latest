@@ -19,17 +19,12 @@ import { Toaster } from "react-hot-toast";
 import "@/styles/main.css";
 import "@/styles/style.css";
 
-
 const activeChain = "binance";
 
-
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <ThirdwebProvider
-     
-      activeChain="binance"
-locale={en()}
+      locale={en()}
       supportedWallets={[
         metamaskWallet(),
         coinbaseWallet(),
@@ -52,7 +47,7 @@ locale={en()}
         rainbowWallet(),
         phantomWallet(),
       ]}
-       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       activeChain={activeChain}
     >
       <Component {...pageProps} />
