@@ -1,12 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import {
-  ThirdwebProvider,
-  ConnectWallet,
-  metamaskWallet,
-  coinbaseWallet,
-  walletConnect,
-} from "@thirdweb-dev/react";
+import {ConnectWallet,} from "@thirdweb-dev/react";
 import Image from "next/image";
 
 function Login() {
@@ -26,18 +20,10 @@ function Login() {
         />
         <h1 className="text-6xl text-white font-bold">THE ANNT DRAW</h1>
         <h2 className="text-white">Get Started By Connecting to your Wallet</h2>
-        <ThirdwebProvider
-          activeChain="binance"
-          clientId="3800ea8bf1b00dc00d5127c441c11b11"
-          
-          supportedWallets={[
-            metamaskWallet(),
-            coinbaseWallet(),
-            walletConnect(),
-          ]}
-        >
-          <ConnectWallet className="connect" modalSize="compact" />;
-        </ThirdwebProvider>
+
+        <ConnectWallet className="connect" modalSize="compact" theme={"dark"}
+        modalTitle={"Connect to ANNT DRAW"} modalTitleIconUrl={"img/annt_logo.png"}/>;
+    
       </div>
       <Head>
         <title>ANNT Draw | Stop, when the fun stops</title>

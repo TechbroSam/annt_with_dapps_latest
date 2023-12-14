@@ -2,14 +2,25 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import {
   ThirdwebProvider,
+  ConnectWallet,
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
+  safeWallet,
+  localWallet,
+  trustWallet,
+  zerionWallet,
+  rainbowWallet,
+  phantomWallet,
+  en,
 } from "@thirdweb-dev/react";
 
 import { Toaster } from "react-hot-toast";
 import "@/styles/main.css";
 import "@/styles/style.css";
+
+
+const activeChain = "binance";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -18,17 +29,31 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThirdwebProvider
      
       activeChain="binance"
-
-       supportedWallets={[
+locale={en()}
+      supportedWallets={[
         metamaskWallet(),
         coinbaseWallet(),
-        walletConnect({
-          projectId: "YOUR_PROJECT_ID",
+        walletConnect(),
+        safeWallet({
+          personalWallets: [
+            metamaskWallet(),
+            coinbaseWallet(),
+            walletConnect(),
+            localWallet(),
+            trustWallet(),
+            zerionWallet(),
+            rainbowWallet(),
+            phantomWallet(),
+          ],
         }),
+        localWallet(),
+        trustWallet(),
+        zerionWallet(),
+        rainbowWallet(),
+        phantomWallet(),
       ]}
-      clientId="3800ea8bf1b00dc00d5127c441c11b11"
-      
-    
+       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      activeChain={activeChain}
     >
       <Component {...pageProps} />
       <Toaster />
