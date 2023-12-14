@@ -5,6 +5,8 @@ import {
   CurrencyDollarIcon,
   ArrowPathIcon,
   ArrowUturnDownIcon,
+  TicketIcon,
+  TrashIcon,
 } from "@heroicons/react/24/solid";
 import {
   useContract,
@@ -17,7 +19,6 @@ import { currency } from "@/constants";
 import toast from "react-hot-toast";
 
 function AdminControls() {
-  
   const { contract, isLoading } = useContract(
     process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
   );
@@ -33,6 +34,16 @@ function AdminControls() {
   );
 
   const { mutateAsync: RefundAll } = useContractWrite(contract, "RefundAll");
+
+  const { mutateAsync: setMaxTicketsPerAddress } = useContractWrite(
+    contract,
+    "setMaxTicketsPerAddress"
+  );
+
+  const { mutateAsync: updateLotteryParams } = useContractWrite(
+    contract,
+    "updateLotteryParams"
+  );
 
   const { mutateAsync: restartDraw } = useContractWrite(
     contract,
@@ -120,6 +131,58 @@ function AdminControls() {
     }
   };
 
+  let newMaxTicketsPerAddress: number;
+
+  const onsetMaxTicketsPerAddress = async () => {
+    const notification = toast.loading("Setting max ticket...");
+
+    try {
+      const data = await setMaxTicketsPerAddress({
+        args: [newMaxTicketsPerAddress],
+      });
+
+      toast.success("Max ticket set successfully!", {
+        id: notification,
+      });
+      console.log("contract call success", data);
+    } catch (err) {
+      toast.error("whoops something went wrong!", {
+        id: notification,
+      });
+
+      console.error("contract call failure", err);
+    }
+  };
+
+  let newTicketPriceInEther: number;
+  let newMaxTickets: number;
+  let newTicketCommissionInEther: number;
+
+  const onupdateLotteryParams = async () => {
+    const notification = toast.loading("Updating lottery...");
+
+    try {
+      const data = await updateLotteryParams({
+        args: [
+          newTicketPriceInEther,
+          newMaxTickets,
+          newTicketCommissionInEther,
+        ],
+      });
+
+      toast.success("Lottery updated successfully!", {
+        id: notification,
+      });
+      console.log("contract call success", data);
+    } catch (err) {
+      toast.error("whoops something went wrong!", {
+        id: notification,
+      });
+
+      console.error("contract call failure", err);
+    }
+  };
+
   return (
     <div
       className="text-white text-center px-5 py-3 rounded-md 
@@ -152,6 +215,14 @@ function AdminControls() {
         <button onClick={onRefundAll} className="admin-button">
           <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
           Refund All
+        </button>
+        <button onClick={onsetMaxTicketsPerAddress} className="admin-button">
+          <TicketIcon className="h-6 mx-auto mb-2" />
+          Max Ticket
+        </button>
+        <button onClick={onupdateLotteryParams} className="admin-button">
+          <TrashIcon className="h-6 mx-auto mb-2" />
+          Change Lottery
         </button>
       </div>
     </div>
