@@ -10,8 +10,6 @@ import "@/styles/style.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  console.log("Connecting to Binance chain...");
-
   return (
     <ThirdwebProvider
      
