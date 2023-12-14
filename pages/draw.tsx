@@ -32,7 +32,7 @@ const Home: NextPage = () => {
 
   const { contract, isLoading } = useContract(
 
-      0xe232c52d0438f605298c0f8faea845cd88d8e1de.toString()
+      "0xE232c52d0438f605298c0f8fAeA845CD88D8e1dE"
     
   );
 
