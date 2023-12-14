@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { NextPage } from "next";
 import Image from "next/image";
 
+
 import {
   useContract,
   useDisconnect,
@@ -31,7 +32,7 @@ const Home: NextPage = () => {
 
   const { contract, isLoading } = useContract(
 
-      process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
+      0xe232c52d0438f605298c0f8faea845cd88d8e1de.toString()
     
   );
 
