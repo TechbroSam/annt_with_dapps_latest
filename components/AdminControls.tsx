@@ -1,4 +1,10 @@
+'use client';
+
 import React from "react";
+
+import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
+import { useState } from 'react';
+
 import { ethers } from "ethers";
 import {
   StarIcon,
@@ -18,11 +24,32 @@ import {
 import { currency } from "@/constants";
 import toast from "react-hot-toast";
 
+
+
 function AdminControls() {
+  
   const { contract, isLoading } = useContract(
     process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
   );
 
+  
+  const [openModal, setOpenModal ] = useState(false);
+
+  const [openModal2, setOpenModal2 ] = useState(false);
+  
+  const [email, setEmail] = useState('');
+ 
+
+  function onCloseModal() {
+    setOpenModal(false);
+    setEmail('');
+  }
+
+    function onCloseModal2() {
+    setOpenModal2(false);
+    setEmail('');
+  }
+  
   const { data: totalCommission } = useContractRead(
     contract,
     "operatorTotalCommission"
@@ -184,9 +211,11 @@ function AdminControls() {
   };
 
   return (
-    <div
+      <>
+      
+<div
       className="text-white text-center px-5 py-3 rounded-md 
-    border-emerald-300/20 border"
+    border-emerald-300/20 border flex flex-col items-center justify-center"
     >
       <h2 className="font-bold">Admin Controls</h2>
       <p className="mb-5">
@@ -216,16 +245,107 @@ function AdminControls() {
           <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />
           Refund All
         </button>
-        <button onClick={onsetMaxTicketsPerAddress} className="admin-button">
-          <TicketIcon className="h-6 mx-auto mb-2" />
+        <button onClick={() => setOpenModal(true)}
+        className="admin-button" type="button">
+          <TicketIcon className="block h-6 mx-auto mb-2" />
           Max Ticket
         </button>
-        <button onClick={onupdateLotteryParams} className="admin-button">
+        <button onClick={() => setOpenModal2(true)} className="admin-button">
           <TrashIcon className="h-6 mx-auto mb-2" />
           Change Lottery
         </button>
-      </div>
-    </div>
+      </div> 
+
+      <Modal show={openModal} size="md" position="center" dismissible onClose={onCloseModal} popup className="md:mt-[10%] !p-5 ">
+         <Modal.Header />
+        <div className="text-lg px-5 font-semibold pb-2 text-gray-700">Set Max Tickets Per Address</div>
+        <div className="flex justify-center items-center"><hr className="h-1 w-full border-slate-300"/></div>
+        <Modal.Body className="px-5 pt-3">
+          <div className="flex flex-col">
+            <div  className="mb-5">
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="New Max Tickets Per Address" className="text-gray-700" />
+              </div>
+              <TextInput
+                id="email"
+                placeholder="uint256"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                
+              />
+            </div>
+            <div className="flex justify-end text-center mb-8">
+    <button className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+    justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
+                Execute
+            </button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={openModal2} size="md" position="center" dismissible onClose={onCloseModal2} popup className="md:mt-[10%] !p-5 ">
+         <Modal.Header />
+        <div className="text-lg px-5 font-semibold pb-2 text-gray-700">Set Maximum Tickets Per Address</div>
+        <div className="flex justify-center items-center"><hr className="h-1 w-full border-slate-300"/></div>
+        <Modal.Body className="px-5 pt-3">
+          <div className="flex flex-col">
+            <div  className="mb-5">
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="New Ticket Price In Ether" className="text-gray-700" />
+              </div>
+              <TextInput
+                id="email"
+                placeholder="uint256"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                
+              />
+            </div>
+             <div  className="mb-5">
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="New Max Tickets Per Address" className="text-gray-700" />
+              </div>
+              <TextInput
+                id="email"
+                placeholder="uint256"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                
+              />
+            </div>
+             <div  className="mb-5">
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="New Ticket Commission In Ether" className="text-gray-700" />
+              </div>
+              <TextInput
+                id="email"
+                placeholder="uint256"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                
+              />
+            </div>
+            <div className="flex justify-end text-center mb-8">
+    <button className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+    justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
+                Execute
+            </button>
+            </div>
+        
+          </div>
+        </Modal.Body>
+      </Modal>
+
+   </div>
+
+    </>
+    
+    
   );
 }
 
