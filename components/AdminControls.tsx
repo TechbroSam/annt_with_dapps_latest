@@ -256,7 +256,7 @@ function AdminControls() {
         </button>
       </div> 
 
-      <Modal show={openModal} size="md" position="center" dismissible onClose={onCloseModal} popup className="md:mt-[10%] !p-5 ">
+      <Modal show={openModal} size="md" position="center" dismissible onClose={onCloseModal} popup className="!p-5 ">
          <Modal.Header />
         <div className="text-lg px-5 font-semibold pb-2 text-gray-700">Set Max Tickets Per Address</div>
         <div className="flex justify-center items-center"><hr className="h-1 w-full border-slate-300"/></div>
