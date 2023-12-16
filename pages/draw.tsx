@@ -236,7 +236,8 @@ const Home: NextPage = () => {
               <div className="flex text-white items-center space-x-2 bg-[#091b18] border-[#004337] border p-4">
                 <p>TICKETS</p>
                 <input
-                  className="flex w-full bg-transparent text-right outline-none"
+                  className="flex w-full bg-transparent border-[#004337] text-right outline-transparent 
+                  focus:border-transparent focus:ring-0 focus:outline-emerald-900 focus:border-none"
                   type="number"
                   min={1}
                   max={5}

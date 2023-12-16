@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import Web3 from "web3";
 
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import { useState } from 'react';
@@ -38,6 +39,41 @@ function AdminControls() {
   const [openModal2, setOpenModal2 ] = useState(false);
   
   const [email, setEmail] = useState('');
+
+
+  const [weiValue, setWeiValue] = useState("");
+  const [error, setError] = useState("");
+
+
+  const convertToWei = () => {
+    try { b
+      // Validate if the entered value is a valid number
+      if (isNaN(email)) {
+        throw new Error("Please enter a valid number.");
+      }
+
+      // Create a new instance of Web3
+      const web3 = new Web3();
+
+      // Convert Ether to Wei
+      const weiValue = web3.utils.toWei(email, "ether");
+
+      // Update the state with the converted value
+      setWeiValue(weiValue);
+
+      // Clear any previous error
+      setError("");
+    } catch (error:any) {
+      // Handle conversion errors
+      setError(error.message);
+    }
+  };
+
+
+   // Conditionally render the "Convert to Wei" button
+  const renderConvertButton = email && !error && (
+    <button onClick={convertToWei}>Convert to Wei</button>
+  );
  
 
   function onCloseModal() {
@@ -285,9 +321,9 @@ function AdminControls() {
         </Modal.Body>
       </Modal>
 
-      <Modal show={openModal2} size="md" position="center" dismissible onClose={onCloseModal2} popup className="md:mt-[10%] !p-5 ">
+      <Modal show={openModal2} size="md" position="center" dismissible onClose={onCloseModal2} popup className="!p-5 ">
          <Modal.Header />
-        <div className="text-lg px-5 font-semibold pb-2 text-gray-700">Set Maximum Tickets Per Address</div>
+        <div className="text-lg px-5 font-semibold pb-2 text-gray-700">Set Lottery Params</div>
         <div className="flex justify-center items-center"><hr className="h-1 w-full border-slate-300"/></div>
         <Modal.Body className="px-5 pt-3">
           <div className="flex flex-col">
@@ -298,11 +334,13 @@ function AdminControls() {
               <TextInput
                 id="email"
                 placeholder="uint256"
-                value={email}
+                value={weiValue || email} // Display converted value if available, otherwise display the original value
                 onChange={(event) => setEmail(event.target.value)}
-                required
-                
+                required 
               />
+                {renderConvertButton}
+  {/* Display error message */}
+      {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
              <div  className="mb-5">
               <div className="mb-2 block">
@@ -324,14 +362,18 @@ function AdminControls() {
               <TextInput
                 id="email"
                 placeholder="uint256"
-                value={email}
+                value={weiValue || email} // Display converted value if available, otherwise display the original value
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                
               />
+
+              {renderConvertButton}
+                {/* Display error message */}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
             </div>
             <div className="flex justify-end text-center mb-8">
-    <button className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+    <button onClick={onupdateLotteryParams} className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
     justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
                 Execute
             </button>

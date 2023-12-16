@@ -37,6 +37,7 @@
     "tailwindcss": "^3.3.2",
     "tailwindcss-fluid-type": "^2.0.3",
     "tw-elements": "^1.1.0",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "web3": "^4.3.0"
   }
 }
