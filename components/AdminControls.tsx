@@ -3,6 +3,7 @@
 import React from "react";
 import Web3 from "web3";
 
+
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 
@@ -33,58 +34,46 @@ function AdminControls() {
     process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
   );
 
+
+ // Create a Web3 instance
+const web3 = new Web3();
   
   const [openModal, setOpenModal ] = useState(false);
 
   const [openModal2, setOpenModal2 ] = useState(false);
   
-  const [email, setEmail] = useState('');
+  const [newMaxTicketsPerAddress, setnewMaxTicketsPerAddress] = useState('');
+  
+  
+  const [newTicketPriceInEther, setnewTicketPriceInEther] = useState<string>(''); 
+  const [newTicketCommissionInEther, setnewTicketCommissionInEther] = useState<string>(''); 
+  const [newMaxTickets, setnewMaxTickets] = useState<string>('');
+
 
 
   const [weiValue, setWeiValue] = useState("");
+  const [weiValue2, setWeiValue2] = useState("");
   const [error, setError] = useState("");
 
+ 
 
-  const convertToWei = () => {
-    try { b
-      // Validate if the entered value is a valid number
-      if (isNaN(email)) {
-        throw new Error("Please enter a valid number.");
-      }
-
-      // Create a new instance of Web3
-      const web3 = new Web3();
-
-      // Convert Ether to Wei
-      const weiValue = web3.utils.toWei(email, "ether");
-
-      // Update the state with the converted value
-      setWeiValue(weiValue);
-
-      // Clear any previous error
-      setError("");
-    } catch (error:any) {
-      // Handle conversion errors
-      setError(error.message);
-    }
-  };
-
-
-   // Conditionally render the "Convert to Wei" button
-  const renderConvertButton = email && !error && (
-    <button onClick={convertToWei}>Convert to Wei</button>
-  );
  
 
   function onCloseModal() {
     setOpenModal(false);
-    setEmail('');
+    setnewMaxTicketsPerAddress('');
   }
 
-    function onCloseModal2() {
-    setOpenModal2(false);
-    setEmail('');
-  }
+function onCloseModal2() {
+  setOpenModal2(false);
+
+  // Clear wei values when the modal is closed
+  setWeiValue('');
+  setWeiValue2('');
+  setnewMaxTickets('');
+  setnewTicketPriceInEther('');
+  setnewTicketCommissionInEther('');
+}
   
   const { data: totalCommission } = useContractRead(
     contract,
@@ -194,7 +183,7 @@ function AdminControls() {
     }
   };
 
-  let newMaxTicketsPerAddress: number;
+  
 
   const onsetMaxTicketsPerAddress = async () => {
     const notification = toast.loading("Setting max ticket...");
@@ -217,19 +206,38 @@ function AdminControls() {
     }
   };
 
-  let newTicketPriceInEther: number;
-  let newMaxTickets: number;
-  let newTicketCommissionInEther: number;
+
+    const updateConvertedValues = () => {
+    try {
+      const priceInWei = web3.utils.toWei(newTicketPriceInEther, "ether");
+      const commissionInWei = web3.utils.toWei(newTicketCommissionInEther, "ether");
+
+      setWeiValue(priceInWei);
+      setWeiValue2(commissionInWei);
+
+        setError(""); // Clear any previous error
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+      throw error; // Re-throw the error to prevent proceeding with the contract execution
+    }
+  };
+
+
 
   const onupdateLotteryParams = async () => {
     const notification = toast.loading("Updating lottery...");
 
     try {
+      // Ensure converted values are updated before calling the contract function
+      updateConvertedValues();
+
       const data = await updateLotteryParams({
         args: [
-          newTicketPriceInEther,
+          weiValue, // Use the converted values directly
           newMaxTickets,
-          newTicketCommissionInEther,
+          weiValue2,
         ],
       });
 
@@ -238,11 +246,11 @@ function AdminControls() {
       });
       console.log("contract call success", data);
     } catch (err) {
-      toast.error("whoops something went wrong!", {
+      toast.error("Whoops, something went wrong!", {
         id: notification,
       });
 
-      console.error("contract call failure", err);
+      console.error("Contract call failure", err);
     }
   };
 
@@ -300,19 +308,19 @@ function AdminControls() {
           <div className="flex flex-col">
             <div  className="mb-5">
               <div className="mb-2 block">
-                <Label htmlFor="email" value="New Max Tickets Per Address" className="text-gray-700" />
+                <Label htmlFor="number" value="New Max Tickets Per Address" className="text-gray-700" />
               </div>
               <TextInput
-                id="email"
+                id="newMaxTicketsPerAddress"
                 placeholder="uint256"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={newMaxTicketsPerAddress}
+                onChange={(event) => setnewMaxTicketsPerAddress(event.target.value)}
                 required
                 
               />
             </div>
             <div className="flex justify-end text-center mb-8">
-    <button className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+    <button onClick={onsetMaxTicketsPerAddress} className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
     justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
                 Execute
             </button>
@@ -329,51 +337,54 @@ function AdminControls() {
           <div className="flex flex-col">
             <div  className="mb-5">
               <div className="mb-2 block">
-                <Label htmlFor="email" value="New Ticket Price In Ether" className="text-gray-700" />
+                <Label htmlFor="number" value="New Ticket Price In Ether" className="text-gray-700" />
               </div>
               <TextInput
-                id="email"
+                id="newTicketPriceInEther"
                 placeholder="uint256"
-                value={weiValue || email} // Display converted value if available, otherwise display the original value
-                onChange={(event) => setEmail(event.target.value)}
+                value={weiValue || newTicketPriceInEther} // Display converted value if available, otherwise display the original value
+                onChange={(event) => setnewTicketPriceInEther(event.target.value)}
                 required 
               />
-                {renderConvertButton}
+                
   {/* Display error message */}
       {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
              <div  className="mb-5">
               <div className="mb-2 block">
-                <Label htmlFor="email" value="New Max Tickets Per Address" className="text-gray-700" />
+                <Label htmlFor="number" value="New Max Tickets Per Address" className="text-gray-700" />
               </div>
               <TextInput
-                id="email"
+                id="newMaxTickets"
                 placeholder="uint256"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={newMaxTickets}
+                onChange={(event) => setnewMaxTickets(event.target.value)}
                 required
                 
               />
             </div>
              <div  className="mb-5">
               <div className="mb-2 block">
-                <Label htmlFor="email" value="New Ticket Commission In Ether" className="text-gray-700" />
+                <Label htmlFor="number" value="New Ticket Commission In Ether" className="text-gray-700" />
               </div>
               <TextInput
-                id="email"
+                id="newTicketCommissionInEther"
                 placeholder="uint256"
-                value={weiValue || email} // Display converted value if available, otherwise display the original value
-                onChange={(event) => setEmail(event.target.value)}
+                value={weiValue2 || newTicketCommissionInEther} // Display converted value if available, otherwise display the original value
+                onChange={(event) => setnewTicketCommissionInEther(event.target.value)}
                 required
               />
 
-              {renderConvertButton}
                 {/* Display error message */}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
             </div>
-            <div className="flex justify-end text-center mb-8">
-    <button onClick={onupdateLotteryParams} className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+            <div className="flex justify-between text-center mb-8">
+    <button onClick={updateConvertedValues} className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
+    justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
+                Convert to wei
+            </button>
+              <button onClick={onupdateLotteryParams} className="text-sm font-medium  dark:text-gray-300 drop-shadow-md hover:bg-green-900/80
     justify-self-end rounded-full border border-green-950 px-8 py-1 bg-green-900 text-slate-100 tracking-widest">
                 Execute
             </button>
