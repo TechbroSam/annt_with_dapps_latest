@@ -15,9 +15,17 @@ const MobileNav: React.FC<NavbarProps> = ({ open, setOpen }) => {
       } transition-transform duration-300 ease-in-out filter drop-shadow-md `}
     >
       <div className="flex items-center justify-center filter drop-shadow-md h-20">
+        <a href="#home"
+            onClick={() =>
+            setTimeout(() => {
+              setOpen(!open);
+            }, 100)
+          }
+          >
         {" "}
         {/*logo container*/}
         <img className="w-28" src="img/annt_logonew.svg" alt="" />
+        </a>
       </div>
       <div className="flex flex-col ml-4">
         <a
@@ -114,7 +122,11 @@ export default function Navbar() {
     >
       <MobileNav open={open} setOpen={setOpen} />
       <div className="flex items-center w-full">
-        <img className="md:w-32 w-28" src="img/annt_logonew.svg" alt="" />
+           <a href="#home" >     
+        {" "}
+        {/*logo container*/}
+        <img className="w-28" src="img/annt_logonew.svg" alt="" />
+        </a>
       </div>
       <div className="w-9/12 flex justify-end items-center">
         <div

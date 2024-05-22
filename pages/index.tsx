@@ -6,21 +6,21 @@ import Image from "next/image";
 
 const Home = () => {
   return (
-    <div>
+    <div id="home">
       <Navbar />
       <div className="color--white -z-0 md:mt-10 mt-12">
         <div className="">
-          <div className="divider-bottom--none">
+          <div id="home" className="divider-bottom--none">
             <div className="wrapper--inner margin--center">
               <div className="margin-bottom--zero--tablet display--flex flex--wrap justify--space-between width--100--desktop-wide position--relative">
                 <div className="width--80--desktop-wide width--80--desktop width--80--tablet width--100--mobile padding-vertical--6xlarge padding-top--3xlarge--tablet padding-top--zero--mobile margin-top--zero--tablet padding-horizontal--large--zero margin-bottom--large margin--center padding-bottom--large--mobile margin-bottom--small--mobile padding-bottom--large">
-                  <div className="position--relative text--center">
-                    <h1
+                  <div  className="position--relative text--center">
+                    <div id="home"
                       style={{ textShadow: "2px 2px 4px #545454c4" }}
-                      className="font--7xlarge text-white font-bold text-center font--large--mobile font--4xlarge--tablet"
+                      className="text-white font-bold text-center text-2xl md:text-4xl lg:text-6xl"
                     >
                       ANNT - A New Nigeria Token
-                    </h1>
+                    </div>
                     <h1 className="font-bold md:text-base text-[9px] margin-bottom--large margin-bottom--1xlarge color--text-white-light margin-top--1xlarge">
                       No force on earth can stop{" "}
                       <span className="auto-type text-[10px] md:text-lg">
