@@ -108,7 +108,7 @@ const Home = () => {
                   Liquidity Pool locked for
                   <strong> 8 years</strong>. Don&apos;t believe us?{" "}
                   <a
-                    href="https://www.team.finance/view-coin/0xf951ead486490bD64193fD2ea475697a9Fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT"
+                    href="https://www.team.finance/view-coin/0xf951ead486490bd64193fd2ea475697a9fd5d582?name=A%20New%20Nigeria%20Token&symbol=ANNT&chainid=0x38"
                     target="_blank"
                     className="link--underline color--text-black-base font-weight--bold"
                   >
